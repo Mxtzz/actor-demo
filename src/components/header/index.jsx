@@ -1,7 +1,12 @@
 import styled from 'styled-components';
+import { Layout } from 'antd';
 
 export const Header = () => {
-  return <Wrapper>{'actor'}</Wrapper>;
+  return (
+    <Layout.Header>
+      <Wrapper>{'actor'}</Wrapper>
+    </Layout.Header>
+  );
 };
 
 const Wrapper = styled.div``;
