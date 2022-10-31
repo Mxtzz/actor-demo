@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
+import styled from 'styled-components';
 import { Menu, Dropdown, Modal, Layout, Avatar, Typography } from 'antd';
 import Hamburger from '@/components/Hamburger';
 import { subStringStr } from '@/utils/filters';
@@ -43,15 +44,18 @@ const NavBar = () => {
       { label: '登出', key: 'logout' },
     ];
 
-    return <Menu onClick={menuClick} className={styles.userInfo} items={items} />;
+    return (
+      <Menu onClick={menuClick} className={styles.userInfo} items={items} />
+    );
   };
 
   const Logo = () => {
+    console.log('123');
     return (
-      <div className={styles.horizontalLogo}>
+      <Wrapper>
         <img src={logo} className={styles.horizontalLogoImg} alt="logo" />
         <h1 className={styles.horizontalLogoTitle}>React-Ant-Admin</h1>
-      </div>
+      </Wrapper>
     );
   };
 
@@ -64,35 +68,64 @@ const NavBar = () => {
     }, []);
     return (
       <div className={styles.horizontalMenuSection}>
-        {initPath ? <MenuBar initPath={initPath} mode={'horizontal'} theme={theme} /> : null}
+        {initPath ? (
+          <MenuBar initPath={initPath} mode={'horizontal'} theme={theme} />
+        ) : null}
       </div>
     );
   };
 
   return (
     // <div className={`nav-bar-section ${!sidebarStatus ? 'open-slide' : 'close-slide'}`}>
-    <div className={`${styles.navBarSection} ${!sidebarStatus ? '' : styles.closeSlide}`}>
+    <div
+      className={`${styles.navBarSection} ${
+        !sidebarStatus ? '' : styles.closeSlide
+      }`}
+    >
       <Header className={`${styles.headerSection}`}>
-        <div className={styles.logoSection}>{layoutMode !== 'horizontal' ? <Hamburger /> : <Logo />}</div>
-
-        {layoutMode !== 'vertical' ? <HorizontalMenu /> : null}
-
-        <div className={styles.rightMenu}>
-          <div className={styles.dropdownWrap}>
-            <Dropdown overlay={DropMenu}>
-              <div>
-                <Avatar size={40} icon={<UserOutlined />} src={avatar} className={styles.avatarWrapper} />
-
-                <span className={styles.username}>{subStringStr(username, 3)}</span>
-
-                <CaretDownOutlined style={{ color: 'rgba(0,0,0,.3)' }} />
-              </div>
-            </Dropdown>
+        <HeaderWraper>
+          <div className={styles.logoSection}>
+            {layoutMode !== 'horizontal' ? <Hamburger /> : <Logo />}
           </div>
-        </div>
+
+          {layoutMode !== 'vertical' ? <HorizontalMenu /> : null}
+
+          <div className={styles.rightMenu}>
+            <div className={styles.dropdownWrap}>
+              <Dropdown overlay={DropMenu}>
+                <div>
+                  <Avatar
+                    size={40}
+                    icon={<UserOutlined />}
+                    src={avatar}
+                    className={styles.avatarWrapper}
+                  />
+
+                  <span className={styles.username}>
+                    {subStringStr(username, 3)}
+                  </span>
+
+                  <CaretDownOutlined style={{ color: 'rgba(0,0,0,.3)' }} />
+                </div>
+              </Dropdown>
+            </div>
+          </div>
+        </HeaderWraper>
       </Header>
     </div>
   );
 };
+
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const HeaderWraper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+`;
 
 export default NavBar;

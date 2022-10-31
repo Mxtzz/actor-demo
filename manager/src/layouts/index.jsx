@@ -11,7 +11,9 @@ import styles from './index.module.less';
 
 const BaseLayout = () => {
   const { sidebarStatus } = useSelector(state => state.app);
-  const { tagsView, showSettings, layoutMode, fixedHeader } = useSelector(state => state.settings);
+  const { tagsView, showSettings, layoutMode, fixedHeader } = useSelector(
+    state => state.settings,
+  );
 
   return (
     <div className={styles.layoutSection}>
@@ -28,9 +30,9 @@ const BaseLayout = () => {
           >
             {/* 顶部导航*/}
             <div
-              className={`${styles[layoutMode]} ${styles.navBarContainer} ${fixedHeader ? styles.fixHeader : ''} ${
-                sidebarStatus ? '' : styles.openSlider
-              }`}
+              className={`${styles[layoutMode]} ${styles.navBarContainer} ${
+                fixedHeader ? styles.fixHeader : ''
+              } ${sidebarStatus ? '' : styles.openSlider}`}
             >
               <NavBar />
               {tagsView ? <TagsView /> : null}

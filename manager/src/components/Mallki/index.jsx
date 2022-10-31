@@ -1,27 +1,25 @@
+import { PropTypes } from 'prop-types';
+import styles from './index.module.less';
 
-import React from 'react'
-import { PropTypes } from 'prop-types'
-import styles from './index.module.less'
-
-const Mallki = ( props ) => {
-  const { className, text } = props
+const Mallki = props => {
+  const { className, text } = props;
   return (
-    <a className={`${styles.mallki} ${className}`} href='#/'>
+    <a className={`${styles.mallki} ${className}`} href="#/">
       {text}
       <span data-letters={text} />
       <span data-letters={text} />
     </a>
-  )
-}
+  );
+};
 
 Mallki.propTypes = {
-  className : PropTypes.string,
-  text : PropTypes.string
-}
+  className: PropTypes.string,
+  text: PropTypes.string,
+};
 
 Mallki.defaultProps = {
-  className : '',
-  text : 'react-ant-admin'
-}
+  className: '',
+  text: 'react-ant-admin',
+};
 
-export default Mallki
+export default Mallki;

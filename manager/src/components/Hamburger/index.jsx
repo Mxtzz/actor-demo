@@ -1,9 +1,8 @@
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import styles from './index.module.less';
 
-const Hamburger = props => {
+const Hamburger = () => {
   const dispatch = useDispatch();
   const sidebarStatus = useSelector(state => state.app.sidebarStatus);
 
@@ -13,7 +12,11 @@ const Hamburger = props => {
 
   return (
     <div className={styles.hamburgerSection} onClick={toggleClick}>
-      {sidebarStatus ? <MenuFoldOutlined className={styles.icons} /> : <MenuUnfoldOutlined className={styles.icons} />}
+      {sidebarStatus ? (
+        <MenuFoldOutlined className={styles.icons} />
+      ) : (
+        <MenuUnfoldOutlined className={styles.icons} />
+      )}
     </div>
   );
 };

@@ -20,6 +20,7 @@
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module",
+    "endOfLine": "auto",
     "ecmaFeatures": {
       "jsx": true
     }
