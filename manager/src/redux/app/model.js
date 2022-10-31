@@ -3,7 +3,9 @@ import { effects } from './effects';
 import { getCookie, addCookie } from '@/utils/cookies';
 
 const initState = {
-  sidebarStatus: getCookie('sidebarStatus') ? !!+getCookie('sidebarStatus') : false,
+  sidebarStatus: getCookie('sidebarStatus')
+    ? !!+getCookie('sidebarStatus')
+    : false,
   device: 'desktop',
 };
 
