@@ -14,7 +14,6 @@ export const effects = dispatch => ({
         };
 
         dispatch.users.SET_USER_INFO(result);
-
         return result;
       } else {
         dispatch.users.CLEAR_USER_INFO();
@@ -40,7 +39,7 @@ export const effects = dispatch => ({
       // return thunkAPI.rejectWithValue(err.response.data || '登出失败');
     }
   },
-  setToken: (token) => {
+  setToken: token => {
     addCookie('token', token);
-  }
+  },
 });

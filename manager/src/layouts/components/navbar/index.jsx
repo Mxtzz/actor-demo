@@ -1,10 +1,9 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
+import { Menu, Dropdown, Modal, Layout, Avatar, Typography } from 'antd';
 import Hamburger from '@/components/Hamburger';
 import { subStringStr } from '@/utils/filters';
-import { Menu, Dropdown, Modal, Layout, Avatar, Typography } from 'antd';
 import styles from './index.module.less';
 import { CaretDownOutlined, UserOutlined } from '@ant-design/icons';
 import logo from '@/assets/imgs/ant.svg';
@@ -13,17 +12,11 @@ const { Header } = Layout;
 
 const { Text } = Typography;
 
-const NavBar = props => {
-  const {
-    avatar,
-    username,
-    sidebarStatus,
-    layoutMode,
-    theme = 'light',
-    // fixedHeader
-  } = props;
-
+const NavBar = () => {
   const dispatch = useDispatch();
+  const { avatar, username } = useSelector(state => state.users);
+  const { sidebarStatus } = useSelector(state => state.app);
+  const { layoutMode, theme = 'light' } = useSelector(state => state.settings);
 
   const menuClick = ({ key }) => {
     switch (key) {
@@ -64,9 +57,9 @@ const NavBar = props => {
 
   const HorizontalMenu = () => {
     const location = useLocation();
-    const [initPath, setInitPath] = React.useState('');
+    const [initPath, setInitPath] = useState('');
 
-    React.useEffect(() => {
+    useEffect(() => {
       setInitPath(location.pathname);
     }, []);
     return (
@@ -102,11 +95,4 @@ const NavBar = props => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    ...state.users,
-    ...state.app,
-    ...state.settings,
-  };
-};
-export default connect(mapStateToProps)(NavBar);
+export default NavBar;

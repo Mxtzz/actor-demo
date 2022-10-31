@@ -83,7 +83,7 @@ const TagList = props => {
       const realPath = findRealPath(currentPath);
       const menuItem = filterTags(routeLists, realPath, [...fixTags]);
       dispatch.tags.UPDATE_TAGS(menuItem);
-      dispatch.tags.SET_DEFAULT_TAGS(fixTags);
+      dispatch.tags.setDefaultTags(fixTags);
     }
   }, []);
 
@@ -109,7 +109,7 @@ const TagList = props => {
   const handleClose = async (e, tag) => {
     e.preventDefault();
 
-    dispatch.tags.DELETE_TAGS(tag);
+    dispatch.tags.deleteTags(tag);
     updatePage(tag.path);
   };
 
@@ -143,7 +143,7 @@ const TagList = props => {
     closeContextMenu();
   };
   const handleCloseAllTags = () => {
-    dispatch.tags.CLEAR_ALL_TAGS();
+    dispatch.tags.clearAllTags();
     navigate(defaultTags[0]['path']);
     closeContextMenu();
   };

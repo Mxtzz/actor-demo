@@ -9,15 +9,15 @@ const initState = {
 export const tags = createModel()({
   state: initState,
   reducers: {
-    SET_DEFAULT_TAGS: (state, { payload: tag }) => {
+    setDefaultTags: (state, tag) => {
       state.defaultTags = [...tag];
       return state;
     },
-    ADD_TAGS: (state, { payload: tag }) => {
+    addTags: (state, { payload: tag }) => {
       state.tags = [...state.tags, tag];
       return state;
     },
-    DELETE_TAGS: (state, { payload: tag }) => {
+    deleteTags: (state, { payload: tag }) => {
       state.tags = [...state.tags.filter(v => v.path !== tag.path)];
       // return {
       //   ...state,
@@ -25,7 +25,7 @@ export const tags = createModel()({
       // }
       return state;
     },
-    CLEAR_ALL_TAGS: state => {
+    clearAllTags: state => {
       state.tags = [...state.tags.filter(v => v.unRemove)];
       return state;
     },

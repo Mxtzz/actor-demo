@@ -1,4 +1,4 @@
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Layout } from 'antd';
 import NavBar from './components/navbar';
 import Main from './components/main';
@@ -9,8 +9,9 @@ import RightPanel from '@/components/RightPanel';
 import { Scrollbars } from 'react-custom-scrollbars';
 import styles from './index.module.less';
 
-const BaseLayout = props => {
-  const { tagsView, showSettings, layoutMode, fixedHeader, sidebarStatus } = props;
+const BaseLayout = () => {
+  const { sidebarStatus } = useSelector(state => state.app);
+  const { tagsView, showSettings, layoutMode, fixedHeader } = useSelector(state => state.settings);
 
   return (
     <div className={styles.layoutSection}>
@@ -46,10 +47,4 @@ const BaseLayout = props => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    ...state.app,
-    ...state.settings,
-  };
-};
-export default connect(mapStateToProps)(BaseLayout);
+export default BaseLayout;

@@ -1,11 +1,11 @@
 import React from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import styles from './index.module.less';
 
 const Hamburger = props => {
-  const { sidebarStatus } = props;
   const dispatch = useDispatch();
+  const sidebarStatus = useSelector(state => state.app.sidebarStatus);
 
   const toggleClick = () => {
     dispatch.app.TOGGLE_SIDEBAR();
@@ -18,4 +18,4 @@ const Hamburger = props => {
   );
 };
 
-export default connect(state => state.app)(Hamburger);
+export default Hamburger;

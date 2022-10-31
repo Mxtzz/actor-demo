@@ -34,10 +34,10 @@ const RouterComponent = props => {
               // const payload = await dispatch(getUserInfoSlice()).unwrap();
               // currentRoles = payload.roles
 
-              const payload = dispatch.users.getUserInfoSlice();
+              const payload = await dispatch.users.getUserInfoSlice();
               // 注入权限路由
-              await dispatch.permission.asyncPermissionRoutes(payload.roles);
-              setRouteList(routes);
+              const { routers } = await dispatch.permission.asyncPermissionRoutes(payload.roles);
+              setRouteList(routers);
             } catch (e) {
               // 退出登录
               dispatch.users.CLEAR_USER_INFO();
