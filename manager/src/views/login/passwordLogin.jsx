@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect, useRef } from 'react';
 
 import { useDispatch } from 'react-redux';
 
@@ -79,7 +79,7 @@ const PasswordLogin = props => {
     hidden: false, //
   };
 
-  const formRef = React.createRef();
+  const formRef = useRef();
 
   // 初始话登录信息 => 是否记住密码
   const initLogin = () => {
@@ -99,7 +99,7 @@ const PasswordLogin = props => {
       };
     }
   };
-  React.useEffect(() => initLogin, []);
+  useEffect(() => initLogin, []);
 
   const onFinish = async values => {
     const { username, password, remember } = values;
@@ -125,7 +125,7 @@ const PasswordLogin = props => {
       });
       const { code, data } = response;
       if (code === 200) {
-        await dispatch.users.SET_TOKEN(data.token);
+        await dispatch.users.setToken(data.token);
         loginSuccess && loginSuccess();
       }
     } catch (error) {

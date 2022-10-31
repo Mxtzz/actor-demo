@@ -13,9 +13,8 @@ const initState = {
 export const users = createModel()({
   state: initState,
   reducers: {
-    SET_TOKEN: (state, token) => {
+    setToken: (state, token) => {
       state.token = token || '';
-      addCookie('token', token);
       return state;
     },
     SET_USER_INFO: (state, { roles, avatar, username }) => {

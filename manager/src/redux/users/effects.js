@@ -1,5 +1,5 @@
 import { getUserInfo, logOut } from '@/api/user';
-import { getCookie, addCookie, removeCookie } from '@/utils/cookies';
+import { getCookie, addCookie } from '@/utils/cookies';
 
 export const effects = dispatch => ({
   reset: () => {},
@@ -22,7 +22,6 @@ export const effects = dispatch => ({
         return Promise.reject('登录请求错误');
       }
     } catch (err) {
-      console.log('err', err);
       dispatch.users.CLEAR_USER_INFO();
       // return thunkAPI.rejectWithValue(err.response.data || '登录失败');
     }
@@ -41,4 +40,7 @@ export const effects = dispatch => ({
       // return thunkAPI.rejectWithValue(err.response.data || '登出失败');
     }
   },
+  setToken: (token) => {
+    addCookie('token', token);
+  }
 });

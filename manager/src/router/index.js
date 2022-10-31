@@ -21,7 +21,6 @@ const RouterComponent = props => {
   const routeGuard = async () => {
     if (!isUnmount.current) {
       const hasToken = getCookie('token');
-
       if (hasToken) {
         if (pathname === '/login') {
           navigate('/');
@@ -35,7 +34,7 @@ const RouterComponent = props => {
               // const payload = await dispatch(getUserInfoSlice()).unwrap();
               // currentRoles = payload.roles
 
-              const payload = dispatch.permission.getUserInfoSlice();
+              const payload = dispatch.users.getUserInfoSlice();
               // 注入权限路由
               await dispatch.permission.asyncPermissionRoutes(payload.roles);
               setRouteList(routes);
