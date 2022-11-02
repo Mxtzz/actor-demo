@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { Layout } from 'antd';
 import Logo from './Logo';
@@ -7,9 +7,9 @@ import Menus from './Menu';
 
 const { Sider } = Layout;
 
-const LayoutSider = props => {
-  const { sidebarLogo, sidebarStatus } = props;
+const LayoutSider = () => {
   const location = useLocation();
+  const sidebarStatus = useSelector(state => state.settings.sidebarStatus);
   const [initPath, setInitPath] = React.useState('');
 
   React.useEffect(() => {
@@ -24,16 +24,10 @@ const LayoutSider = props => {
       collapsed={sidebarStatus}
       style={{ zIndex: '10' }}
     >
-      {sidebarLogo ? <Logo /> : null}
+      <Logo />
       {initPath ? <Menus initPath={initPath} /> : null}
     </Sider>
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    ...state.app,
-    ...state.settings,
-  };
-};
-export default connect(mapStateToProps)(LayoutSider);
+export default LayoutSider;

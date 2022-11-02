@@ -81,31 +81,31 @@ export const FontIcon = props => {
 
   switch (size) {
     case 'extra-small':
-      style.fontSize = '16px';
+      style.fontSize = '12px';
       break;
 
     case 'small':
-      style.fontSize = '24px';
+      style.fontSize = '14px';
       break;
 
     case 'extra-default':
-      style.fontSize = '30px';
+      style.fontSize = '16px';
       break;
 
     case 'default':
-      style.fontSize = '32px';
+      style.fontSize = '20px';
       break;
 
     case 'large':
-      style.fontSize = '40px';
+      style.fontSize = '28px';
       break;
 
     case 'extra-large':
-      style.fontSize = '50px';
+      style.fontSize = '32px';
       break;
 
     default:
-      style.fontSize = '14px';
+      style.fontSize = '12px';
       break;
   }
   if (fontSize) style.fontSize = fontSize;
