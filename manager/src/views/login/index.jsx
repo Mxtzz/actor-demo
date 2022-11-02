@@ -33,7 +33,11 @@ const Login = () => {
         </div>
         <div className={styles.main}>
           <Spin spinning={loading} tip={'loading'}>
-            <PasswordLogin loginFailed={loginFailed} loginSuccess={loginSuccess} loginStart={loginStart} />
+            <PasswordLogin
+              loginFailed={loginFailed}
+              loginSuccess={loginSuccess}
+              loginStart={loginStart}
+            />
           </Spin>
         </div>
         <div className={styles.footer}>

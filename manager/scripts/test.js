@@ -67,9 +67,9 @@ argv.push(
     createJestConfig(
       relativePath => path.resolve(__dirname, '..', relativePath),
       path.resolve(paths.appSrc, '..'),
-      false
-    )
-  )
+      false,
+    ),
+  ),
 );
 
 // This is a very dirty workaround for https://github.com/facebook/jest/issues/5913.
@@ -80,23 +80,23 @@ function resolveJestDefaultEnvironment(name) {
   const jestDir = path.dirname(
     resolve.sync('jest', {
       basedir: __dirname,
-    })
+    }),
   );
   const jestCLIDir = path.dirname(
     resolve.sync('jest-cli', {
       basedir: jestDir,
-    })
+    }),
   );
   const jestConfigDir = path.dirname(
     resolve.sync('jest-config', {
       basedir: jestCLIDir,
-    })
+    }),
   );
   return resolve.sync(name, {
     basedir: jestConfigDir,
   });
 }
-let cleanArgv = [];
+const cleanArgv = [];
 let env = 'jsdom';
 let next;
 do {

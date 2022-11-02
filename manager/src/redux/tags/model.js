@@ -30,7 +30,9 @@ export const tags = createModel()({
       return state;
     },
     CLOSE_OTHERS_TAGS: (state, { payload: tag }) => {
-      state.tags = [...state.tags.filter(v => v.unRemove || v.path === tag.path)];
+      state.tags = [
+        ...state.tags.filter(v => v.unRemove || v.path === tag.path),
+      ];
       return state;
     },
     UPDATE_TAGS: (state, { payload: tag }) => {

@@ -28,7 +28,11 @@ const RightPanel = props => {
         open={show}
         onClose={onClose}
       >
-        <div className={styles.handleButton} onClick={toggleShow} style={{ top: `${buttonTop}px` }}>
+        <div
+          className={styles.handleButton}
+          onClick={toggleShow}
+          style={{ top: `${buttonTop}px` }}
+        >
           {show ? <CloseOutlined /> : <SettingOutlined />}
         </div>
 

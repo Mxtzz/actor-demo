@@ -31,11 +31,10 @@ const PasswordLogin = props => {
       return {
         pass: true,
       };
-    } else {
-      return {
-        pass: true,
-      };
     }
+    return {
+      pass: true,
+    };
   };
   const rules = {
     username: [
@@ -45,9 +44,8 @@ const PasswordLogin = props => {
             const validate = checkAccount(value);
             if (validate && validate.pass) {
               return Promise.resolve();
-            } else {
-              return Promise.reject(validate.message || '账号格式错误');
             }
+            return Promise.reject(validate.message || '账号格式错误');
           } catch (e) {
             return Promise.reject(e);
           }
@@ -166,7 +164,12 @@ const PasswordLogin = props => {
       onValuesChange={onValuesChange}
     >
       <Item name="username" rules={rules.username} {...itemConfig}>
-        <Input allowClear={true} maxLength={11} prefix={<UserOutlined />} placeholder="username" />
+        <Input
+          allowClear={true}
+          maxLength={11}
+          prefix={<UserOutlined />}
+          placeholder="username"
+        />
       </Item>
       <Item name="password" rules={rules.password} {...itemConfig}>
         <Input
@@ -186,7 +189,11 @@ const PasswordLogin = props => {
         </a>
       </Item>
       <Item>
-        <Button type="primary" htmlType={'submit'} className={styles.loginFormButton}>
+        <Button
+          type="primary"
+          htmlType={'submit'}
+          className={styles.loginFormButton}
+        >
           登录
         </Button>
       </Item>

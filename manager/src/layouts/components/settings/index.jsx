@@ -33,17 +33,29 @@ const Settings = props => {
 
         <div className={styles.drawerItem}>
           <span>开启 TagsView</span>
-          <Switch checked={tagsView} onChange={toggleTagsView} className={styles.drawerSwitch} />
+          <Switch
+            checked={tagsView}
+            onChange={toggleTagsView}
+            className={styles.drawerSwitch}
+          />
         </div>
 
         <div className={styles.drawerItem}>
           <span>固定 Header</span>
-          <Switch checked={fixedHeader} onChange={toggleFixedHeader} className={styles.drawerSwitch} />
+          <Switch
+            checked={fixedHeader}
+            onChange={toggleFixedHeader}
+            className={styles.drawerSwitch}
+          />
         </div>
 
         <div className={styles.drawerItem}>
           <span>侧边栏 Logo</span>
-          <Switch checked={sidebarLogo} onChange={toggleSideBarLogo} className={styles.drawerSwitch} />
+          <Switch
+            checked={sidebarLogo}
+            onChange={toggleSideBarLogo}
+            className={styles.drawerSwitch}
+          />
         </div>
 
         <Divider> 布局模式 </Divider>
@@ -52,7 +64,9 @@ const Settings = props => {
           <div className={styles.layoutMode}>
             <Tooltip title="左侧模式">
               <div
-                className={`${layoutMode === 'vertical' ? styles.active : ''} ${styles.modeItem}`}
+                className={`${layoutMode === 'vertical' ? styles.active : ''} ${
+                  styles.modeItem
+                }`}
                 ref={verticalEl}
                 onClick={() => changeMode('vertical')}
               >
@@ -63,7 +77,9 @@ const Settings = props => {
 
             <Tooltip title="顶部模式">
               <div
-                className={`${layoutMode === 'horizontal' ? styles.active : ''} ${styles.modeItem}`}
+                className={`${
+                  layoutMode === 'horizontal' ? styles.active : ''
+                } ${styles.modeItem}`}
                 ref={horizontalEl}
                 onClick={() => changeMode('horizontal')}
               >

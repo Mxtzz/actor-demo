@@ -23,7 +23,9 @@ export function getAllRedirects(routers, directs, initPath = '') {
   routers.forEach(item => {
     const { children, redirect, path, component } = item;
     // if ( item.index ) {
-    const currentPath = path.startsWith('/') ? `${initPath}${path}` : `${initPath}/${path}`;
+    const currentPath = path.startsWith('/')
+      ? `${initPath}${path}`
+      : `${initPath}/${path}`;
 
     // component => 防止重复添加
     if (redirect && component) {
@@ -50,9 +52,8 @@ export function getAllRedirects(routers, directs, initPath = '') {
 function hasPermission(roles, route) {
   if (route.roles && roles.length) {
     return roles.some(role => route.roles.includes(role));
-  } else {
-    return true;
   }
+  return true;
 }
 
 /**

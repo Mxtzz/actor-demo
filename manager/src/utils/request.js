@@ -2,7 +2,11 @@ import axios from 'axios';
 import { message as AntMessage } from 'antd';
 import { getEnvs } from '@/utils/env';
 import { getCookie } from '@/utils/cookies';
-import { WHITE_CODE_LIST, LOGIN_ERROR_CODE, GLOBAL_DATA } from '@/config/constant';
+import {
+  WHITE_CODE_LIST,
+  LOGIN_ERROR_CODE,
+  GLOBAL_DATA,
+} from '@/config/constant';
 
 import { store } from '@/store';
 // import qs from 'qs'
@@ -124,24 +128,23 @@ class HttpRequest {
         // 如果是文件流 直接返回
         if (type === '[object Blob]' || type === '[object ArrayBuffer]') {
           return result;
-        } else {
-          const { code, message } = result;
-          const isErrorToken = LOGIN_ERROR_CODE.find(item => item.code == code);
-          const isWhiteCode = WHITE_CODE_LIST.find(item => item.code == code);
+        }
+        const { code, message } = result;
+        const isErrorToken = LOGIN_ERROR_CODE.find(item => item.code == code);
+        const isWhiteCode = WHITE_CODE_LIST.find(item => item.code == code);
 
-          if (isErrorToken) {
-            // token已过期 跳转到登录
-            store.dispatch.users.loginOut();
-            window.location.reload();
-          } else if (!isWhiteCode) {
-            AntMessage.error({
-              content: message || 'Error',
-              duration: 3 * 1000,
-            });
-            return Promise.reject(message || 'Error');
-          } else {
-            return result;
-          }
+        if (isErrorToken) {
+          // token已过期 跳转到登录
+          store.dispatch.users.loginOut();
+          window.location.reload();
+        } else if (!isWhiteCode) {
+          AntMessage.error({
+            content: message || 'Error',
+            duration: 3 * 1000,
+          });
+          return Promise.reject(message || 'Error');
+        } else {
+          return result;
         }
       },
       error => {
@@ -150,7 +153,9 @@ class HttpRequest {
         }
         const isTimeout = error.message.includes('timeout');
         AntMessage.error({
-          message: isTimeout ? '网络请求超时' : error.message || '连接到服务器失败',
+          message: isTimeout
+            ? '网络请求超时'
+            : error.message || '连接到服务器失败',
           type: 'error',
           duration: 2 * 1000,
         });

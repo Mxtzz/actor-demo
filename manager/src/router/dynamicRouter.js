@@ -19,10 +19,8 @@ function generateRouter(routers) {
     let element;
     if (component) {
       element = <item.component />;
-    } else {
-      if (redirect) {
-        element = <Navigate to={item.redirect} replace />;
-      }
+    } else if (redirect) {
+      element = <Navigate to={item.redirect} replace />;
     }
     obj.element = element;
     return obj;

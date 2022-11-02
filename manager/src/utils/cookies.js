@@ -8,14 +8,12 @@ const reg = /^(\d+)\.(\d+)\.(\d+)\.(\d+)$/;
 let cookiePreFix = '';
 if (hostname.indexOf('localhost') >= 0 || reg.test(hostname)) {
   cookiePreFix = 'fat_';
+} else if (getEnv === 'fat') {
+  cookiePreFix = 'fat_';
+} else if (getEnv === 'uat') {
+  cookiePreFix = 'uat_';
 } else {
-  if (getEnv === 'fat') {
-    cookiePreFix = 'fat_';
-  } else if (getEnv === 'uat') {
-    cookiePreFix = 'uat_';
-  } else {
-    cookiePreFix = '';
-  }
+  cookiePreFix = '';
 }
 cookiePreFix += COOKIE_PREFIX;
 const baseParams = {

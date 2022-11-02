@@ -36,7 +36,8 @@ const RouterComponent = props => {
 
               const payload = await dispatch.users.getUserInfoSlice();
               // 注入权限路由
-              const { routers } = await dispatch.permission.asyncPermissionRoutes(payload.roles);
+              const { routers } =
+                await dispatch.permission.asyncPermissionRoutes(payload.roles);
               setRouteList(routers);
             } catch (e) {
               // 退出登录

@@ -14,14 +14,16 @@ const Main = props => {
 
   return (
     <Content
-      className={`${styles.mainSection} ${fixedHeader ? styles.fixedHeader : ''} ${
-        tagsView ? styles.hasTags : styles.noTags
-      } `}
+      className={`${styles.mainSection} ${
+        fixedHeader ? styles.fixedHeader : ''
+      } ${tagsView ? styles.hasTags : styles.noTags} `}
     >
       {/* 动画 styles-transition.less => forward-from-right back-to-right fade-in fade-transform*/}
       <TransitionGroup
         className={styles.mainWrapper}
-        childFactory={child => React.cloneElement(child, { classNames: 'forward-from-right' })}
+        childFactory={child =>
+          React.cloneElement(child, { classNames: 'forward-from-right' })
+        }
       >
         <CSSTransition timeout={500} key={location.pathname}>
           <div className={styles.mainContent}>

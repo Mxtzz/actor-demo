@@ -2,7 +2,8 @@ import { createModel } from '@rematch/core';
 import { effects } from './effects';
 import defaultSettings from '@/defaultSettings';
 import { getCookie, addCookie } from '@/utils/cookies';
-const { showSettings, sidebarLogo, fixedHeader, tagsView, layoutMode } = defaultSettings;
+const { showSettings, sidebarLogo, fixedHeader, tagsView, layoutMode } =
+  defaultSettings;
 const localLayoutMode = getCookie('layoutMode');
 
 const initState = {

@@ -1,4 +1,10 @@
-import React, { useRef, useMemo, useState, useCallback, useEffect } from 'react';
+import React, {
+  useRef,
+  useMemo,
+  useState,
+  useCallback,
+  useEffect,
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
 import { Scrollbars } from 'react-custom-scrollbars';
@@ -8,7 +14,9 @@ import styles from './index.module.less';
 
 const TagList = props => {
   const { tags, defaultTags } = useSelector(state => state.tags);
-  const { routes: routeLists, allRedirects } = useSelector(state => state.permission);
+  const { routes: routeLists, allRedirects } = useSelector(
+    state => state.permission,
+  );
   const tagListContainer = useRef();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -180,8 +188,12 @@ const TagList = props => {
         autoHideTimeout={1000}
         autoHideDuration={200}
         hideTracksWhenNotNeeded={true}
-        renderView={props => <div {...props} className={styles.scrollbarContainer} />}
-        renderTrackVertical={props => <div {...props} className={styles.scrollbarTrackVertical} />}
+        renderView={props => (
+          <div {...props} className={styles.scrollbarContainer} />
+        )}
+        renderTrackVertical={props => (
+          <div {...props} className={styles.scrollbarTrackVertical} />
+        )}
       >
         <ul className={styles.tagsWrap} ref={tagListContainer}>
           {tagLists.length > 0 &&
@@ -195,7 +207,9 @@ const TagList = props => {
                   color={currentPath === tag.path ? '#55acee' : ''}
                 >
                   <Link to={tag.path}>
-                    {currentPath === tag.path ? <span className={styles.active} /> : null}
+                    {currentPath === tag.path ? (
+                      <span className={styles.active} />
+                    ) : null}
                     {tag.title}
                   </Link>
                 </Tag>
@@ -205,7 +219,11 @@ const TagList = props => {
       </Scrollbars>
 
       {menuVisible ? (
-        <ul className={styles.contextmenu} style={{ left: `${left}px`, top: `${top}px` }} ref={contextMenuContainer}>
+        <ul
+          className={styles.contextmenu}
+          style={{ left: `${left}px`, top: `${top}px` }}
+          ref={contextMenuContainer}
+        >
           <li onClick={handleCloseOtherTags}>关闭其他</li>
           <li onClick={handleCloseAllTags}>关闭所有</li>
         </ul>
