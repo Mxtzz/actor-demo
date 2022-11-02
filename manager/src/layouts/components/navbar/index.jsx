@@ -1,19 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import { DownOutlined } from '@ant-design/icons';
-import {
-  Avatar,
-  Dropdown,
-  message,
-  Space,
-  Modal,
-  Layout,
-  Typography,
-} from 'antd';
+import { Avatar, Dropdown, Space, Modal, Layout, Typography } from 'antd';
 import { CaretDownOutlined, UserOutlined } from '@ant-design/icons';
-import logo from '@/assets/imgs/ant.svg';
 import { subStringStr } from '@/utils/filters';
+import { Hamburger } from '@/components/Hamburger';
+import { FontIcon } from '@/components';
 
 const { Header } = Layout;
 const { Text } = Typography;
@@ -55,7 +47,7 @@ const NavBar = () => {
   return (
     <Header>
       <HeaderWrapper>
-        <div></div>
+        <Hamburger />
         <Dropdown
           menu={{
             items,
@@ -66,7 +58,8 @@ const NavBar = () => {
           <UserInfo onClick={e => e.preventDefault()}>
             <Space>
               <Avatar size={40} icon={<UserOutlined />} src={avatar} />
-              <UserName>{subStringStr(username, 3)}</UserName>
+              <UserName>{subStringStr(username, 5)}</UserName>
+              <FontIcon name={'down'} size={'small'} />
             </Space>
           </UserInfo>
         </Dropdown>

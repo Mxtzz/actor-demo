@@ -69,7 +69,7 @@ const asyncRoutesList = [
     title: '管理',
     redirect: '/manage/list',
     component: Layout,
-    icon: 'warning-circle',
+    icon: 'team',
     roles: ['admin', 'editor'],
     children: [
       {

@@ -12,7 +12,7 @@ const initState = {
 export const app = createModel()({
   state: initState,
   reducers: {
-    TOGGLE_SIDEBAR: state => {
+    toggleSidebar: state => {
       state.sidebarStatus = !state.sidebarStatus;
 
       if (state.sidebarStatus) {

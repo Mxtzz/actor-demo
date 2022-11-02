@@ -6,7 +6,7 @@ const Logo = () => {
   return (
     <Wrapper className={styles.sidebarLogoWrapper}>
       <img src={logo} className={styles.sidebarLogo} alt="logo" />
-      <p className={styles.sidebarTitle}>React-Ant-Admin</p>
+      <p className={styles.sidebarTitle}>{'Management'}</p>
     </Wrapper>
   );
 };
