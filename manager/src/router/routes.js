@@ -18,17 +18,23 @@ import nestedRouter from './modules/nested';
 const constantRoutesList = [
   {
     path: '/login',
-    component: dynamicImport(() => import(/* webpackChunkName:'Login'*/ '@/views/login')),
+    component: dynamicImport(() =>
+      import(/* webpackChunkName:'Login'*/ '@/views/login'),
+    ),
     hidden: true,
   },
   {
     path: '/401',
-    component: dynamicImport(() => import(/* webpackChunkName:'Error401'*/ '@/views/errorPage/401')),
+    component: dynamicImport(() =>
+      import(/* webpackChunkName:'Error401'*/ '@/views/errorPage/401'),
+    ),
     hidden: true,
   },
   {
     path: '/404',
-    component: dynamicImport(() => import(/* webpackChunkName:'Error401'*/ '@/views/errorPage/404')),
+    component: dynamicImport(() =>
+      import(/* webpackChunkName:'Error401'*/ '@/views/errorPage/404'),
+    ),
     hidden: true,
   },
   {
@@ -52,7 +58,9 @@ const asyncRoutesList = [
         hidden: true,
         // affix : true,
         roles: ['admin', 'editor'],
-        component: dynamicImport(() => import(/* webpackChunkName:'Dashboard'*/ '@/views/dashboard')),
+        component: dynamicImport(() =>
+          import(/* webpackChunkName:'Dashboard'*/ '@/views/dashboard'),
+        ),
       },
     ],
   },
@@ -62,20 +70,24 @@ const asyncRoutesList = [
     title: '错误页面',
     redirect: '/error/404',
     component: Layout,
-    icon: '404',
+    icon: 'warning-circle',
     roles: ['admin', 'editor'],
     children: [
       {
         path: '/error/404',
         title: '404',
         roles: ['admin', 'editor'],
-        component: dynamicImport(() => import(/* webpackChunkName:'ErrorPage404'*/ '@/views/errorPage/404')),
+        component: dynamicImport(() =>
+          import(/* webpackChunkName:'ErrorPage404'*/ '@/views/errorPage/404'),
+        ),
       },
       {
         path: '/error/401',
         title: '401',
         roles: ['admin', 'editor'],
-        component: dynamicImport(() => import(/* webpackChunkName:'ErrorPage401'*/ '@/views/errorPage/401')),
+        component: dynamicImport(() =>
+          import(/* webpackChunkName:'ErrorPage401'*/ '@/views/errorPage/401'),
+        ),
       },
     ],
   },
@@ -84,7 +96,7 @@ const asyncRoutesList = [
     path: 'antd',
     component: Layout,
     title: '外链-ant',
-    icon: 'ant-design',
+    icon: 'sound',
     roles: ['admin', 'editor'],
     children: [
       {
