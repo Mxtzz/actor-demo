@@ -64,7 +64,32 @@ const asyncRoutesList = [
       },
     ],
   },
-  nestedRouter,
+  {
+    path: '/manage',
+    title: '管理',
+    redirect: '/manage/list',
+    component: Layout,
+    icon: 'warning-circle',
+    roles: ['admin', 'editor'],
+    children: [
+      {
+        path: '/manage/list',
+        title: '列表',
+        roles: ['admin', 'editor'],
+        component: dynamicImport(() =>
+          import(/* webpackChunkName:'ErrorPage404'*/ '@/views/manage/list'),
+        ),
+      },
+      {
+        path: '/manage/add',
+        title: '添加',
+        roles: ['admin', 'editor'],
+        component: dynamicImport(() =>
+          import(/* webpackChunkName:'ErrorPage401'*/ '@/views/manage/add'),
+        ),
+      },
+    ],
+  },
   {
     path: '/error',
     title: '错误页面',
@@ -91,7 +116,7 @@ const asyncRoutesList = [
       },
     ],
   },
-
+  nestedRouter,
   {
     path: 'antd',
     component: Layout,

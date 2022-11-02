@@ -8,17 +8,15 @@ const users = {
   'admin-token': {
     id: 'admin',
     roles: ['admin'],
-    username: '灰是小灰灰的灰',
-    avatar:
-      'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80',
+    username: 'Mxtzz',
+    avatar: 'https://pic2.zhimg.com/v2-8fac0cdf423ebe9f02e22b2e2da249a5_r.jpg',
     description: '我是超级管理员',
   },
   'editor-token': {
     id: 'editor',
     roles: ['editor'],
     username: '普通用户',
-    avatar:
-      'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80',
+    avatar: 'https://pic4.zhimg.com/v2-762d7a294a36fac50f4af8efab0f5d7b_r.jpg',
     description: '产品啥也不是',
   },
 };
