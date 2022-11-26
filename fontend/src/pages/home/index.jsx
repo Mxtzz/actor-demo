@@ -6,10 +6,10 @@ import { SearchInput } from './search';
 import { List } from './list';
 
 export const Home = () => {
-  const [ name, setName ] = useState();
+  const [name, setName] = useState();
   return (
     <Wrapper>
-      <Layout search={<SearchInput onSearch={v => setName(v)} />} list={<List name={name} />} more={<More />} />
+      <Layout search={<SearchInput onSearch={v => setName(v)} />} list={<List starName={name} />} more={<More />} />
     </Wrapper>
   );
 };

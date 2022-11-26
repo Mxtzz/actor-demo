@@ -90,7 +90,11 @@ const HomeList = ({ starName = '' }) => {
             />
           }
           style={{ overflowX: 'hidden' }}
-          endMessage={<Divider plain>It is all, nothing more 🤐</Divider>}
+          endMessage={
+            <Divider plain style={{ color: '#aaa' }}>
+              已经到底了
+            </Divider>
+          }
           scrollableTarget="scrollableDiv"
         >
           <List

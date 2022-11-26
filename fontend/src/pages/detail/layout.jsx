@@ -3,6 +3,7 @@ import { COLOR } from '@config/constant';
 import { Divider, Typography, Skeleton, Image, Space } from 'antd';
 import { detail } from '../../mock/detail';
 import React from 'react';
+import moment from 'moment';
 
 const { Title, Paragraph } = Typography;
 
@@ -14,15 +15,19 @@ export const DetailLayout = props => {
   const descList = [
     {
       title: '年龄',
-      value: detail.starAge,
+      value: detail.starAge + '岁',
     },
     {
       title: '身高',
-      value: detail.starHeight,
+      value: detail.starHeight + 'cm',
     },
     {
       title: '体重',
-      value: detail.starWeight,
+      value: detail.starWeight + 'kg',
+    },
+    {
+      title: '生日',
+      value: moment(detail.starDate).format('YYYY-MM-DD'),
     },
   ];
 
@@ -41,7 +46,7 @@ export const DetailLayout = props => {
               {descList.map(item => (
                 <React.Fragment key={item.title}>
                   <Space>
-                    <Title level={5} style={{ margin: 0, fontWeight: 500 }}>
+                    <Title level={5} style={{ margin: 0, fontWeight: 600 }}>
                       {item.title}
                     </Title>
                     <Title level={5} style={{ margin: 0, fontWeight: 400 }}>
