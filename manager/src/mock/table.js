@@ -1,4 +1,5 @@
 import Mock from 'mockjs';
+const { Random } = Mock;
 const list = [];
 const count = 20;
 
@@ -29,6 +30,26 @@ for (let i = 0; i < 7; i++) {
   );
 }
 
+// 数据
+const actorList = {
+  page: 0,
+  size: 0,
+  count: 0,
+  data: [
+    {
+      'array|30': {
+        name: Random.cname(),
+        age: Random.integer(1, 99),
+        birth: Random.date(),
+        gender: Random.integer(1, 2),
+        picture: Random.image(),
+        describe: Random.cparagraph(),
+        address: Random.province(),
+      },
+    },
+  ],
+};
+
 export default {
   tableData: _ => {
     return {
@@ -47,6 +68,14 @@ export default {
       data: {
         list: list2,
       },
+    };
+  },
+
+  list: () => {
+    return {
+      code: 200,
+      message: 'success',
+      data: actorList,
     };
   },
 };

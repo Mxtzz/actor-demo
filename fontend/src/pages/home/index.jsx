@@ -1,15 +1,17 @@
+import { useState } from 'react';
 import styled from 'styled-components';
-import { Layout } from 'antd';
-import { Header, Footer } from '@comp';
+import { useData } from '@/hooks';
+import { Layout } from './layout';
+import { More } from './more';
+import { SearchInput } from './search';
+import { List } from './list';
 
 export const Home = () => {
+  const { home } = useData();
+  const [ name, setName ] = useState();
   return (
     <Wrapper>
-      <Layout>
-        <Header>{'header'}</Header>
-        <Layout.Content>{'Content'}</Layout.Content>
-        <Footer />
-      </Layout>
+      <Layout search={<SearchInput onSearch={v => setName(v)} />} list={<List name={name} />} more={<More />} />
     </Wrapper>
   );
 };
