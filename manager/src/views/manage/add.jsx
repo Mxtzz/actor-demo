@@ -1,22 +1,39 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { PlusOutlined } from '@ant-design/icons';
-import { Form, Input, Select, Switch, Upload, Space, DatePicker } from 'antd';
+import { PlusOutlined, LoadingOutlined } from '@ant-design/icons';
+import { Form, Input, message, Switch, Upload, Space, DatePicker } from 'antd';
 import { useEffect } from 'react';
 
 const { TextArea } = Input;
 
 export const Add = props => {
   const { form } = props;
-  const onReset = () => {
-    form.resetFields();
+  const [loading, setLoading] = useState(false);
+  const [imageUrl, setImageUrl] = useState();
+  const handleChange = info => {
+    if (info.file.status === 'uploading') {
+      setLoading(true);
+      return;
+    }
+    if (info.file.status === 'done') {
+      // Get this url from response in real world.
+      setLoading(false);
+      setImageUrl(info.file.response.data);
+    }
   };
 
-  useEffect(() => {
-    return () => {
-      onReset();
-    };
-  }, []);
+  const uploadButton = (
+    <div>
+      {loading ? <LoadingOutlined /> : <PlusOutlined />}
+      <div
+        style={{
+          marginTop: 8,
+        }}
+      >
+        Upload
+      </div>
+    </div>
+  );
 
   return (
     <Wrapper>
@@ -66,18 +83,33 @@ export const Add = props => {
           name="starMasterImg"
           label="C位照片"
           valuePropName="fileList"
+          getValueFromEvent={e => {
+            if (Array.isArray(e)) {
+              return e;
+            }
+            return e && e.fileList;
+          }}
         >
-          <Upload action="/star/upload" listType="picture-card">
-            <div>
-              <PlusOutlined />
-              <div
+          <Upload
+            name="avatar"
+            listType="picture-card"
+            className="avatar-uploader"
+            showUploadList={false}
+            action="/star/upload"
+            beforeUpload={beforeUpload}
+            onChange={handleChange}
+          >
+            {imageUrl ? (
+              <img
+                src={imageUrl}
+                alt="avatar"
                 style={{
-                  marginTop: 8,
+                  width: '100%',
                 }}
-              >
-                上传
-              </div>
-            </div>
+              />
+            ) : (
+              uploadButton
+            )}
           </Upload>
         </Form.Item>
       </Form>
@@ -86,3 +118,20 @@ export const Add = props => {
 };
 
 const Wrapper = styled.div``;
+
+const getBase64 = (img, callback) => {
+  const reader = new FileReader();
+  reader.addEventListener('load', () => callback(reader.result));
+  reader.readAsDataURL(img);
+};
+const beforeUpload = file => {
+  const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+  if (!isJpgOrPng) {
+    message.error('You can only upload JPG/PNG file!');
+  }
+  const isLt2M = file.size / 1024 / 1024 < 20;
+  if (!isLt2M) {
+    message.error('Image must smaller than 20MB!');
+  }
+  return isJpgOrPng && isLt2M;
+};

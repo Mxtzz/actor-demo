@@ -112,4 +112,11 @@ export default {
   defaultResult: () => {
     return defaultResult;
   },
+
+  getUpload: () => {
+    return {
+      ...defaultResult,
+      data: 'https://asset.txqn.huohua.cn/assets/b0df4fad-ade4-4acc-b1d3-8b7025357e9d.jpg',
+    };
+  },
 };

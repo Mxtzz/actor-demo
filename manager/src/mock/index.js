@@ -3,7 +3,8 @@ import loginMock from './login';
 import tableMock from './table';
 
 const { login, userInfo, logout } = loginMock;
-const { tableData, dashboardTable, getByParam, defaultResult } = tableMock;
+const { tableData, dashboardTable, getByParam, defaultResult, getUpload } =
+  tableMock;
 
 // login
 Mock.mock(/\/login/, 'post', login);
@@ -17,3 +18,4 @@ Mock.mock(/\/table\/dashboard/, 'get', dashboardTable);
 Mock.mock(/star\/getByParam/, 'get', getByParam);
 Mock.mock(/star\/del/, 'get', defaultResult);
 Mock.mock(/star\/saveOrUpdate/, 'post', defaultResult);
+Mock.mock(/star\/upload/, 'post', getUpload);

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Avatar, Button, Table, Space, Skeleton, message } from 'antd';
 import { Search } from './search';
 import { AddBtn } from './add-modal';
+import { Edit } from './edit';
 import { del, getByParam } from '../../api/table';
 
 const DataList = () => {
@@ -14,6 +15,7 @@ const DataList = () => {
   });
   const [result, setResult] = useState({});
   const [records, setRecords] = useState([]);
+  const [editId, setEditId] = useState();
 
   useEffect(() => {
     result && setRecords(result.records || []);
@@ -54,7 +56,9 @@ const DataList = () => {
       render: id => (
         <Space>
           <Button>{'Detail'}</Button>
-          <Button type={'primary'}>{'Edit'}</Button>
+          <Button type={'primary'} onClick={() => setEditId(id)}>
+            {'Edit'}
+          </Button>
           <Button type={'primary'} danger onClick={() => onDelClick(id)}>
             {'Delete'}
           </Button>
@@ -77,10 +81,10 @@ const DataList = () => {
     }
   };
 
-  const onAddClick = () => {};
   const onDelClick = id => {
     id && del(id);
     console.log('===del', id);
+    onReload();
   };
 
   const onChange = data => {
@@ -101,6 +105,16 @@ const DataList = () => {
     }
   };
 
+  const onReload = () => {
+    console.log('onReload');
+    setRecords([]);
+    setParam({
+      starName: '',
+      pageNum: 0,
+      pageSize: 30,
+    });
+  };
+
   const pagination = {
     // current: result.current,
     pageSize: result.size,
@@ -111,7 +125,7 @@ const DataList = () => {
     <Wrapper>
       <SearchWrapper>
         <Search onSearch={onSearch} />
-        <AddBtn />
+        <AddBtn onReload={onReload} />
       </SearchWrapper>
 
       <Skeleton avatar title={false} loading={initLoading} active>
@@ -125,6 +139,15 @@ const DataList = () => {
           onChange={onChange}
         />
       </Skeleton>
+
+      <Edit
+        show={!!editId}
+        data={records.find(r => r.id === editId)}
+        onClose={() => {
+          setEditId();
+          onReload();
+        }}
+      />
     </Wrapper>
   );
 };

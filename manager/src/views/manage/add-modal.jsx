@@ -1,9 +1,9 @@
 import { Button, Modal, Form, message } from 'antd';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Add } from './add';
 import { saveOrUpdate } from '../../api/table';
 
-export const AddBtn = () => {
+export const AddBtn = ({ onReload }) => {
   const [form] = Form.useForm();
 
   const [open, setOpen] = useState(false);
@@ -22,6 +22,7 @@ export const AddBtn = () => {
       const result = await saveOrUpdate(fields);
       setOpen(false);
       setConfirmLoading(false);
+      onReload();
     } catch (err) {
       message.error(err);
     }
