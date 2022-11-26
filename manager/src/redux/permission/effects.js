@@ -6,7 +6,6 @@ export const effects = dispatch => ({
   asyncPermissionRoutes: async (roles, rootState) => {
     // 获取权限路由
     const accessedRoutes = filterAsyncRoutes(asyncRoutes, roles);
-
     // 提取 权限重定向路由
     const asyncRedirects = getAllRedirects(accessedRoutes, []);
 

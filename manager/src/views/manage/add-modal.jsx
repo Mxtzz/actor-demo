@@ -1,37 +1,52 @@
-import { Button, Modal } from 'antd';
+import { Button, Modal, Form, message } from 'antd';
 import { useState } from 'react';
 import { Add } from './add';
+import { saveOrUpdate } from '../../api/table';
 
 export const AddBtn = () => {
+  const [form] = Form.useForm();
+
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
-  const [modalText, setModalText] = useState('Content of the modal');
 
   const showModal = () => {
     setOpen(true);
   };
 
-  const handleOk = () => {
-    setModalText('The modal will be closed after two seconds');
+  const handleOk = async () => {
+    const fields = form.getFieldsValue();
+    console.log('===add', fields);
     setConfirmLoading(true);
-    setTimeout(() => {
+
+    try {
+      const result = await saveOrUpdate(fields);
       setOpen(false);
       setConfirmLoading(false);
-    }, 2000);
+    } catch (err) {
+      message.error(err);
+    }
+
+    onReset();
   };
 
   const handleCancel = () => {
     console.log('Clicked cancel button');
     setOpen(false);
+    onReset();
+  };
+
+  const onReset = () => {
+    form.resetFields();
+    console.log('===reset');
   };
 
   return (
     <>
       <Button type="primary" onClick={showModal}>
-        {'Add'}
+        {'添加'}
       </Button>
       <Modal
-        title="Add new item"
+        title="添加新成员"
         open={open}
         maskClosable={false}
         centered={true}
@@ -40,11 +55,12 @@ export const AddBtn = () => {
           overflowY: 'auto',
         }}
         onOk={handleOk}
-        okText={'Submit'}
+        okText={'提交'}
         confirmLoading={confirmLoading}
         onCancel={handleCancel}
+        width={800}
       >
-        <Add />
+        <Add form={form} />
       </Modal>
     </>
   );

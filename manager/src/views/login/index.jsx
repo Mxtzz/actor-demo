@@ -1,5 +1,6 @@
 import React, { useLayoutEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 import styles from './index.module.less';
 import { Spin } from 'antd';
 import Logo from './logo';
@@ -25,12 +26,11 @@ const Login = () => {
   };
 
   return (
-    <div className={`${styles.loginContainer} un-select`}>
-      <div className={`${styles.body} ${styles.fixWidth}`}>
-        <div className={styles.top}>
-          <Logo className={styles.logos} />
-          <div className={styles.desc}> {'sub title'}</div>
-        </div>
+    <Wrapper>
+      <Container>
+        <Top>
+          <Logo />
+        </Top>
         <div className={styles.main}>
           <Spin spinning={loading} tip={'loading'}>
             <PasswordLogin
@@ -43,9 +43,32 @@ const Login = () => {
         <div className={styles.footer}>
           <div className={styles.desc} />
         </div>
-      </div>
-    </div>
+      </Container>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Container = styled.div`
+  height: 400px;
+  width: 400px;
+`;
+const Top = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+`;
 
 export default Login;

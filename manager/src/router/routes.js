@@ -1,7 +1,7 @@
 import Layout from '@/layouts';
 import { dynamicImport } from './utils';
 // import componentsRouter from "./modules/components";
-import nestedRouter from './modules/nested';
+// import nestedRouter from './modules/nested';
 // import { isExternal } from '@/utils/validate'
 
 /**
@@ -39,7 +39,7 @@ const constantRoutesList = [
   },
   {
     path: '/',
-    redirect: '/dashboard/index',
+    redirect: '/manage/list',
   },
 ];
 
@@ -116,11 +116,11 @@ const asyncRoutesList = [
       },
     ],
   },
-  nestedRouter,
+  // nestedRouter,
   {
     path: 'antd',
     component: Layout,
-    title: '外链-ant',
+    title: '外链',
     icon: 'sound',
     roles: ['admin', 'editor'],
     children: [

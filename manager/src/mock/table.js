@@ -3,6 +3,12 @@ const { Random } = Mock;
 const list = [];
 const count = 20;
 
+const defaultResult = {
+  code: 200,
+  message: 'success',
+  data: {},
+};
+
 for (let i = 0; i < count; i++) {
   list.push(
     Mock.mock({
@@ -30,24 +36,49 @@ for (let i = 0; i < 7; i++) {
   );
 }
 
-// 数据
-const actorList = {
-  page: 0,
-  size: 0,
-  count: 0,
-  data: [
-    {
-      'array|30': {
-        name: Random.cname(),
-        age: Random.integer(1, 99),
-        birth: Random.date(),
-        gender: Random.integer(1, 2),
-        picture: Random.image(),
-        describe: Random.cparagraph(),
-        address: Random.province(),
-      },
-    },
-  ],
+const getActorList = () => {
+  // 数据
+  const current = Random.integer(1, 99);
+  const pages = Random.integer(2, 99);
+  const size = Random.integer(1, 99);
+  // const total = Random.integer(1, 99);
+  const actorList = {
+    current,
+    pages,
+    searchCount: false,
+    size,
+    total: size * pages,
+    records: [],
+  };
+
+  for (let i = 0; i < actorList.pages * actorList.size; i++) {
+    actorList.records.push({
+      certify: Random.integer(1, 99),
+      cooperation: {},
+      createBy: '',
+      createTime: Date.now(),
+      experience: Random.cparagraph(),
+      id: Random.integer(24),
+      sort: 1,
+      starAge: Random.integer(1, 99),
+      starBriefIntroduction: Random.cparagraph(),
+      starDate: Date.now(),
+      starHeight: Random.integer(100, 199).toString(),
+      starHobby: Random.cparagraph(),
+      starImg: Random.image(),
+      starImgs: Random.image(),
+      starLanguage: 'Chinese',
+      starMasterImg: Random.image(),
+      starMasterVideo: Random.image(),
+      starName: Random.cname(),
+      starNation: Random.province(),
+      starRepresentativeWork: Random.cparagraph(),
+      starWeight: Random.integer(1, 99),
+      updateTime: Date.now(),
+    });
+  }
+
+  return actorList;
 };
 
 export default {
@@ -71,11 +102,14 @@ export default {
     };
   },
 
-  list: () => {
+  getByParam: () => {
     return {
       code: 200,
       message: 'success',
-      data: actorList,
+      data: getActorList(),
     };
+  },
+  defaultResult: () => {
+    return defaultResult;
   },
 };
