@@ -43,40 +43,40 @@ const Container = styled(Content)`
   justify-content: center;
 `;
 const GalleryWrapper = styled.div``;
-const TitleWrapper = styled.div`
-  display: flex;
-  align-items: flex-end;
-  margin: 32px 0;
-`;
-const Title = styled.div`
-  color: #fff;
-  font-size: 38px;
-  margin-right: 20px;
-`;
-const SubTitle = styled.div`
-  color: #aaa;
-  font-size: 22px;
-`;
+// const TitleWrapper = styled.div`
+//   display: flex;
+//   align-items: flex-end;
+//   margin: 32px 0;
+// `;
+// const Title = styled.div`
+//   color: #fff;
+//   font-size: 38px;
+//   margin-right: 20px;
+// `;
+// const SubTitle = styled.div`
+//   color: #aaa;
+//   font-size: 22px;
+// `;
 
-const Btns = styled.div`
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-  margin-right: 10vw;
-  .page-btn {
-    color: #999;
-    background: #222;
-    border-radius: 2rem;
-    font-size: 2rem;
-    padding: 6px;
-    margin-left: 2rem;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    &:hover {
-      color: #aaa;
-      background: #666;
-    }
-  }
-`;
+// const Btns = styled.div`
+//   flex: 1;
+//   display: flex;
+//   justify-content: flex-end;
+//   margin-right: 10vw;
+//   .page-btn {
+//     color: #999;
+//     background: #222;
+//     border-radius: 2rem;
+//     font-size: 2rem;
+//     padding: 6px;
+//     margin-left: 2rem;
+//     cursor: pointer;
+//     transition: all 0.2s ease-in-out;
+//     &:hover {
+//       color: #aaa;
+//       background: #666;
+//     }
+//   }
+// `;
 
 export { WorksLayout as Layout };

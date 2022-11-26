@@ -21,6 +21,10 @@ export const Detail = () => {
         console.log('getDetail', result);
       }
     })();
+    return () => {
+      setDetail({});
+      setLoading(true);
+    };
   }, [location]);
 
   return (

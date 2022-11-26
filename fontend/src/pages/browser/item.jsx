@@ -1,9 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import { COLOR } from '@config/constant';
-import { List, Typography, Skeleton } from 'antd';
-import { useLocation, Link } from 'react-router-dom';
-import { getParams, getBrowserList } from '@/api';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Thumbs } from 'swiper';
 

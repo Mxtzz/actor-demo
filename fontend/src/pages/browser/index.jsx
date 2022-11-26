@@ -1,19 +1,13 @@
 import styled from 'styled-components';
 import { COLOR } from '@config/constant';
-import { List, Typography, Skeleton, Layout, Breadcrumb, Divider, Space } from 'antd';
+import { List, Skeleton, Layout, Breadcrumb, Divider, Space } from 'antd';
 import { useLocation, Link } from 'react-router-dom';
 import { getParams, getBrowserList } from '@/api';
 import { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { ListItem } from './item';
 
-const { Paragraph } = Typography;
-
 export const Browser = () => {
-  // const items = [
-  //   { label: '首页', key: 'home' },
-  //   { label: '搜索结果', key: 'result' },
-  // ];
   const location = useLocation();
   const param = getParams(location.search);
 
@@ -44,9 +38,6 @@ export const Browser = () => {
       }
     })();
   };
-
-  const onClick = id => {};
-  console.log('list', list);
 
   return (
     <Wrapper>
