@@ -23,7 +23,7 @@ export const Gallery = props => {
     return {
       id: item.id,
       title: item.name,
-      src: item.picture,
+      src: item.src,
     };
   });
   return (

@@ -16,9 +16,9 @@ export const Detail = () => {
         const result = await getDetail(param.id);
         if (result && result.data) {
           setDetail(result.data);
+          console.log('getDetail', result.data);
         }
         setLoading(false);
-        console.log('getDetail', result);
       }
     })();
     return () => {
@@ -27,9 +27,17 @@ export const Detail = () => {
     };
   }, [location]);
 
+  const gallery = [
+    {
+      id: detail.id + 1,
+      title: detail.starName,
+      src: detail.starMasterImg,
+    },
+  ];
+
   return (
     <>
-      <DetailLayout loading={loading} gallery={<Gallery list={detail.works} />} detail={detail} />;
+      <DetailLayout loading={loading} gallery={<Gallery list={gallery} />} detail={detail} />;
     </>
   );
 };

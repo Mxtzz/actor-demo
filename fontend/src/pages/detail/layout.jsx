@@ -1,14 +1,30 @@
 import styled from 'styled-components';
 import { COLOR } from '@config/constant';
-import { Divider, Typography, Skeleton, Image } from 'antd';
+import { Divider, Typography, Skeleton, Image, Space } from 'antd';
+import { detail } from '../../mock/detail';
+import React from 'react';
 
-const { Paragraph } = Typography;
+const { Title, Paragraph } = Typography;
 
 export const DetailLayout = props => {
-  const {
-    loading,
-    detail: { name, award, intro, list = [] },
-  } = props;
+  const { loading, detail } = props;
+
+  if (!detail) return <></>;
+
+  const descList = [
+    {
+      title: '年龄',
+      value: detail.starAge,
+    },
+    {
+      title: '身高',
+      value: detail.starHeight,
+    },
+    {
+      title: '体重',
+      value: detail.starWeight,
+    },
+  ];
 
   return (
     <Wrapper>
@@ -19,23 +35,28 @@ export const DetailLayout = props => {
             <Skeleton active />
           ) : (
             <>
-              <Name>{name}</Name>
-              <Descriptions>{intro}</Descriptions>
+              <Name>{detail.starName}</Name>
+              <Descriptions>{detail.starBriefIntroduction}</Descriptions>
               <Divider style={{ borderTop: '2px solid #e0e0e0' }} />
-              <Typography.Title level={5} style={{ margin: 0, fontWeight: 400 }}>
-                {'获奖记录'}
-              </Typography.Title>
-              <Paragraph>{award}</Paragraph>
-              <Typography.Title level={5} style={{ margin: 0, fontWeight: 400 }}>
-                {'自我介绍'}
-              </Typography.Title>
-              <Paragraph>{intro}</Paragraph>
+              {descList.map(item => (
+                <React.Fragment key={item.title}>
+                  <Space>
+                    <Title level={5} style={{ margin: 0, fontWeight: 500 }}>
+                      {item.title}
+                    </Title>
+                    <Title level={5} style={{ margin: 0, fontWeight: 400 }}>
+                      {item.value}
+                    </Title>
+                  </Space>
+                  <br />
+                </React.Fragment>
+              ))}
             </>
           )}
         </RightWrapper>
       </Container>
       <Container>
-        {list.map(item => (
+        {[].map(item => (
           <AwardItem>
             <ALeft>
               <Image

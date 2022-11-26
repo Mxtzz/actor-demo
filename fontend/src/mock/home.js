@@ -55,7 +55,6 @@ const getActorList = ({ pageNum, pageSize, starName }) => {
 
 export const home = {
   list: _ => {
-    console.log('mock param', getParams(_.url));
     const { pageNum, pageSize, starName } = getParams(_.url);
     return {
       code: 200,

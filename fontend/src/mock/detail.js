@@ -4,26 +4,37 @@ const { Random } = Mock;
 
 // 数据
 const data = {
-  id: Random.integer(24).toString(),
-  name: Random.cname(),
-  age: Random.integer(1, 99),
-  birth: Random.date(),
-  gender: Random.integer(1, 2),
-  picture: Random.image(),
-  describe: Random.cparagraph(),
-  address: Random.province(),
-  intro: Random.cparagraph(),
-  award: Random.cparagraph(),
-  works: []
+  certify: Random.integer(1, 99),
+  cooperation: {},
+  createBy: '',
+  createTime: Date.now(),
+  experience: Random.cparagraph(),
+  id: Random.integer(24),
+  sort: 1,
+  starAge: Random.integer(1, 99),
+  starBriefIntroduction: Random.cparagraph(),
+  starDate: Date.now(),
+  starHeight: Random.integer(100, 199).toString(),
+  starHobby: Random.cparagraph(),
+  starImg: Random.image(),
+  starImgs: Random.image(),
+  starLanguage: 'Chinese',
+  starMasterImg: Random.image(),
+  starMasterVideo: Random.image(),
+  starName: Random.cname(),
+  starNation: Random.province(),
+  starRepresentativeWork: Random.cparagraph(),
+  starWeight: Random.integer(1, 99),
+  updateTime: Date.now(),
 };
 
-for (let i = 0; i < Random.integer(0, 4); i++) {
-  data.works.push({
-    id: Random.integer(24).toString(),
-    picture: Random.image(),
-    title: Random.cparagraph(3, 20),
-  });
-}
+// for (let i = 0; i < Random.integer(0, 4); i++) {
+//   data.works.push({
+//     id: Random.integer(24).toString(),
+//     picture: Random.image(),
+//     title: Random.cparagraph(3, 20),
+//   });
+// }
 
 export const detail = {
   data: _ => {
@@ -43,7 +54,6 @@ export const detail = {
     };
   },
 };
-
 
 // CREATE TABLE `star_info`
 // (
