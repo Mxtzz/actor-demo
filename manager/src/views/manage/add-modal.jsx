@@ -1,5 +1,5 @@
 import { Button, Modal, Form, message } from 'antd';
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { Add } from './add';
 import { saveOrUpdate } from '../../api/table';
 
@@ -15,11 +15,12 @@ export const AddBtn = ({ onReload }) => {
 
   const handleOk = async () => {
     const fields = form.getFieldsValue();
-    console.log('===add', fields);
     setConfirmLoading(true);
 
     try {
+      console.log('添加新Item参数：', fields);
       const result = await saveOrUpdate(fields);
+      console.log('添加新Item结果: ', result);
       setOpen(false);
       setConfirmLoading(false);
       onReload();

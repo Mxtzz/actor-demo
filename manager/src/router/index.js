@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -7,15 +7,14 @@ import { getCookie } from '@/utils/cookies';
 
 const whiteList = ['/login'];
 
-const RouterComponent = props => {
+const RouterComponent = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
-  const routes = useSelector(state => state.permission.routes);
+  // const routes = useSelector(state => state.permission.routes);
   const roles = useSelector(state => state.users.roles);
   const { pathname } = location;
   const [routeList, setRouteList] = useState([]);
-  const isUnmount = useRef(false);
 
   // 路由守卫
   const routeGuard = async () => {

@@ -142,14 +142,6 @@ const PasswordLogin = props => {
     console.log('onFinishFailed', error);
   };
 
-  const onFieldsChange = (changedFields, allFields) => {
-    // console.log('onFieldsChange', changedFields, allFields );
-  };
-
-  const onValuesChange = (changedValues, allValues) => {
-    // console.log('onValuesChange', changedValues, allValues );
-  };
-
   return (
     <Form
       ref={formRef}
@@ -160,8 +152,8 @@ const PasswordLogin = props => {
       initialValues={initialValues}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
-      onFieldsChange={onFieldsChange}
-      onValuesChange={onValuesChange}
+      // onFieldsChange={onFieldsChange}
+      // onValuesChange={onValuesChange}
     >
       <Item name="username" rules={rules.username} {...itemConfig}>
         <Input

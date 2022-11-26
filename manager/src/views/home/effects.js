@@ -1,3 +1,3 @@
-export const effects = dispatch => ({
+export const effects = () => ({
   reset: () => {},
 });

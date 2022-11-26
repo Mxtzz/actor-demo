@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { PlusOutlined, LoadingOutlined } from '@ant-design/icons';
-import { Form, Input, message, Switch, Upload, Space, DatePicker } from 'antd';
-import { useEffect } from 'react';
+import { Form, Input, message, Switch, Upload, DatePicker } from 'antd';
 
 const { TextArea } = Input;
 
@@ -119,11 +118,6 @@ export const Add = props => {
 
 const Wrapper = styled.div``;
 
-const getBase64 = (img, callback) => {
-  const reader = new FileReader();
-  reader.addEventListener('load', () => callback(reader.result));
-  reader.readAsDataURL(img);
-};
 const beforeUpload = file => {
   const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
   if (!isJpgOrPng) {

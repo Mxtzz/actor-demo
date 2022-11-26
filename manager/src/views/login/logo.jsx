@@ -1,9 +1,7 @@
-import React from 'react';
 import styled from 'styled-components';
-import styles from './logo.module.less';
 import logo from '@/assets/imgs/ant.svg';
 
-const Logo = props => {
+const Logo = () => {
   return (
     <Wrapper>
       <Img src={logo} alt="logo" />

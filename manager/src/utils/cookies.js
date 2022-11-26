@@ -24,6 +24,7 @@ const baseParams = {
 
 export function getCookie(key, off = false) {
   const keyStr = off ? key : `${cookiePreFix}${key}`;
+  console.log(keyStr);
   // return Cookies.get(keyStr);
   // test
   return 'admin-token';

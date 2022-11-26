@@ -1,5 +1,5 @@
 import Layout from '@/layouts';
-import { dynamicImport } from '../utils';
+// import { dynamicImport } from '../utils';
 
 const nestedRouter = {
   path: '/nested',
