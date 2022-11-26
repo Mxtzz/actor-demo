@@ -11,10 +11,17 @@ export const getParams = (url = '') => {
   return result;
 };
 
-export const getHomeList = (data) => {
+export const getHomeList = data => {
   return request({
     url: '/home/list',
     method: 'post',
+    data,
+  });
+};
+export const getByParam = data => {
+  return request({
+    url: '/star/getByParam',
+    method: 'get',
     data,
   });
 };
@@ -26,14 +33,15 @@ export const getWorksList = () => {
   });
 };
 
-export const getDetail = id => {
+export function getDetail(id) {
   return request({
-    url: '/detail?id=' + id,
+    url: '/star/selectDetail?id=' + id,
+    method: 'get',
   });
-};
+}
 
 export const getBrowserList = name => {
   return request({
     url: '/browser?name=' + name,
   });
-}
+};

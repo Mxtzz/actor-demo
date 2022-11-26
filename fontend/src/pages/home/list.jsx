@@ -3,40 +3,43 @@ import { List, Skeleton, Divider } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { getHomeList } from '@/api';
+import { getByParam } from '@/api';
 
-const HomeList = ({ name = '' }) => {
+const HomeList = ({ starName = '' }) => {
   const navigate = useNavigate();
   const [data, setData] = useState({
     list: [],
-    page: 1,
+    current: 1,
     size: 30,
-    count: 0,
+    total: 0,
+    pages: 0,
   });
   const [param, setParam] = useState({
-    page: 1,
-    name,
+    pageNum: 1,
+    starName,
+    pageSize: 100,
   });
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     (async () => {
       try {
-        const result = await getHomeList({ ...param });
+        const result = await getByParam({ ...param });
         if (result && result.data) {
           const data = result.data;
+          console.log('首页getByParam: ', data);
           setData(l => {
             return {
-              list: l.list.concat(data.data),
-              page: data.page,
+              list: l.list.concat(data.records),
+              current: data.current || 1,
               size: data.size,
-              count: data.count,
+              total: data.total,
+              pages: data.pages,
             };
           });
         }
-        console.log('getHomeList', result);
       } catch (err) {
-        console.log('getHomeList err', err);
+        console.log('getByParam err', err);
       }
       setLoading(false);
     })();
@@ -45,14 +48,14 @@ const HomeList = ({ name = '' }) => {
   useEffect(() => {
     setData({
       list: [],
-      page: 1,
-      size: 30,
-      count: 0,
+      current: 1,
+      size: 0,
+      total: 0,
     });
     setParam(p => {
-      return { ...p, name };
+      return { ...p, pageNum: 1, starName };
     });
-  }, [name]);
+  }, [starName]);
 
   const onClick = id => {
     if (id) {
@@ -66,11 +69,9 @@ const HomeList = ({ name = '' }) => {
       return;
     }
     setParam(p => {
-      return { ...p, page: p.page + 1 };
+      return { ...p, pageNum: p.pageNum + 1 };
     });
   };
-
-  console.log('data', data);
 
   return (
     <Wrapper>
@@ -78,7 +79,7 @@ const HomeList = ({ name = '' }) => {
         <InfiniteScroll
           dataLength={data.list.length}
           next={loadMoreData}
-          hasMore={data.count / data.size > data.page}
+          hasMore={data.pages > data.current}
           loader={
             <Skeleton
               avatar
@@ -106,10 +107,10 @@ const HomeList = ({ name = '' }) => {
             renderItem={item => (
               <List.Item>
                 <ItemWrapper onClick={() => onClick(item.id)}>
-                  <Img bg={item.picture} />
+                  <Img bg={item.starMasterImg} />
                   <TitleWrapper>
-                    <Title>{item.name}</Title>
-                    <Desc>{item.age + '岁'}</Desc>
+                    <Title>{item.starName}</Title>
+                    <Desc>{item.starAge + '岁'}</Desc>
                   </TitleWrapper>
                 </ItemWrapper>
               </List.Item>

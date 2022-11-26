@@ -6,6 +6,7 @@ class HttpRequest {
   constructor() {
     this.withCredentials = false;
     this.timeout = 10000;
+    this.baseUrl = process.env.API_SERVER;
   }
 
   getConfig() {
@@ -114,9 +115,7 @@ class HttpRequest {
         }
         const isTimeout = error.message.includes('timeout');
         AntMessage.error({
-          message: isTimeout
-            ? '网络请求超时'
-            : error.message || '连接到服务器失败',
+          message: isTimeout ? '网络请求超时' : error.message || '连接到服务器失败',
           type: 'error',
           duration: 2 * 1000,
         });

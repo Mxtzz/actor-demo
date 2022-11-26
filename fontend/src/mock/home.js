@@ -1,41 +1,66 @@
 import Mock from 'mockjs';
+import { getParams } from '../api';
 const { Random } = Mock;
 
-const getList = (page, name) => {
+const total = Random.integer(0, 399);
+
+const getActorList = ({ pageNum, pageSize, starName }) => {
   // 数据
+  const current = Number(pageNum);
+
   const actorList = {
-    page: 0,
-    size: 0,
-    count: 0,
-    data: [],
+    current,
+    pages: Math.ceil(total / pageSize),
+    searchCount: false,
+    size: Number(pageSize),
+    total: total,
+    records: [],
   };
 
-  for (let i = 0; i < 30; i++) {
-    actorList.data.push({
-      id: Random.integer(24).toString(),
-      name: name + Random.cname(),
-      age: Random.integer(1, 99),
-      birth: Random.date(),
-      gender: Random.integer(1, 2),
-      picture: Random.image(),
-      describe: Random.cparagraph(),
-      address: Random.province(),
+  let count = pageSize;
+  const isLastPage = current === actorList.pages;
+  if (isLastPage) {
+    count = total % pageSize;
+  }
+
+  for (let i = 0; i < count; i++) {
+    actorList.records.push({
+      certify: Random.integer(1, 99),
+      cooperation: {},
+      createBy: '',
+      createTime: Date.now(),
+      experience: Random.cparagraph(),
+      id: Random.integer(24),
+      sort: 1,
+      starAge: Random.integer(1, 99),
+      starBriefIntroduction: Random.cparagraph(),
+      starDate: Date.now(),
+      starHeight: Random.integer(100, 199).toString(),
+      starHobby: Random.cparagraph(),
+      starImg: Random.image(),
+      starImgs: Random.image(),
+      starLanguage: 'Chinese',
+      starMasterImg: Random.image(),
+      starMasterVideo: Random.image(),
+      starName: Number(pageNum * pageSize + i) + Random.cname(),
+      starNation: Random.province(),
+      starRepresentativeWork: Random.cparagraph(),
+      starWeight: Random.integer(1, 99),
+      updateTime: Date.now(),
     });
   }
-  actorList.page = page;
-  actorList.name = name;
-  actorList.size = 30;
-  actorList.count = Random.integer(page * 30, 99);
+
   return actorList;
 };
 
 export const home = {
   list: _ => {
-    const { page, name } = JSON.parse(_.body);
+    console.log('mock param', getParams(_.url));
+    const { pageNum, pageSize, starName } = getParams(_.url);
     return {
       code: 200,
       message: 'success',
-      data: getList(page, name),
+      data: getActorList({ pageNum, pageSize, starName }),
     };
   },
 };
