@@ -5,21 +5,23 @@ import { Search } from './search';
 import { AddBtn } from './add-modal';
 import { Edit } from './edit';
 import { del, getByParam } from '../../api/table';
+import { DetailModal } from './detail';
 
 const DataList = () => {
   const [initLoading, setInitLoading] = useState(true);
   const [param, setParam] = useState({
     starName: '',
-    pageNum: 0,
+    pageNum: 1,
     pageSize: 30,
   });
   const [result, setResult] = useState({});
   const [records, setRecords] = useState([]);
   const [editId, setEditId] = useState();
+  const [showDetail, setShowDetail] = useState();
 
   useEffect(() => {
     result && setRecords(result.records || []);
-    console.log('===result', result);
+    console.log('getByParam: ', result);
   }, [result]);
 
   useEffect(() => {
@@ -55,12 +57,14 @@ const DataList = () => {
       key: 'handle',
       render: id => (
         <Space>
-          <Button>{'Detail'}</Button>
+          <Button onClick={() => setShowDetail(records.find(r => r.id === id))}>
+            {'Detail'}
+          </Button>
           <Button type={'primary'} onClick={() => setEditId(id)}>
-            {'Edit'}
+            {'编辑'}
           </Button>
           <Button type={'primary'} danger onClick={() => onDelClick(id)}>
-            {'Delete'}
+            {'删除'}
           </Button>
         </Space>
       ),
@@ -88,7 +92,11 @@ const DataList = () => {
   };
 
   const onChange = data => {
-    console.log('===onhange', data);
+    console.log('翻页', data);
+    const { current = 1 } = data;
+    setParam(p => {
+      return { ...p, pageNum: current };
+    });
   };
 
   const onSearch = value => {
@@ -97,7 +105,7 @@ const DataList = () => {
       setRecords([]);
       setParam({
         starName: value,
-        pageNum: 0,
+        pageNum: 1,
         pageSize: 30,
       });
     } else {
@@ -110,13 +118,13 @@ const DataList = () => {
     setRecords([]);
     setParam({
       starName: '',
-      pageNum: 0,
+      pageNum: 1,
       pageSize: 30,
     });
   };
 
   const pagination = {
-    // current: result.current,
+    current: param.pageNum,
     pageSize: result.size,
     total: result.total,
   };
@@ -147,7 +155,10 @@ const DataList = () => {
           setEditId();
           onReload();
         }}
+        onCancel={() => setEditId()}
       />
+
+      <DetailModal detail={showDetail} onClose={() => setShowDetail()} />
     </Wrapper>
   );
 };

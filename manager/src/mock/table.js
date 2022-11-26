@@ -1,7 +1,7 @@
 import Mock from 'mockjs';
+import { getParams } from '@/utils/request';
+
 const { Random } = Mock;
-const list = [];
-const count = 20;
 
 const defaultResult = {
   code: 200,
@@ -9,49 +9,28 @@ const defaultResult = {
   data: {},
 };
 
-for (let i = 0; i < count; i++) {
-  list.push(
-    Mock.mock({
-      id: '@increment',
-      title: '@ctitle(5, 10)',
-      author: '@cname',
-      readings: '@integer(300, 5000)',
-      date: '@datetime',
-    }),
-  );
-}
+const total = Random.integer(0, 399);
 
-const list2 = [];
-for (let i = 0; i < 7; i++) {
-  list2.push(
-    Mock.mock({
-      id: i,
-      date: '@date("yyyy-MM-dd")',
-      name: '@cname',
-      status: i % 2 ? 'Completed' : 'Pending',
-      price: '@integer(300, 5000)',
-      order_no: '@natural',
-      address: '@county(true)',
-    }),
-  );
-}
-
-const getActorList = () => {
+const getActorList = ({ pageNum, pageSize, starName }) => {
   // 数据
-  const current = Random.integer(1, 99);
-  const pages = Random.integer(2, 99);
-  const size = Random.integer(1, 99);
-  // const total = Random.integer(1, 99);
+  const current = Number(pageNum);
+
   const actorList = {
     current,
-    pages,
+    pages: Math.ceil(total / pageSize),
     searchCount: false,
-    size,
-    total: size * pages,
+    size: Number(pageSize),
+    total: total,
     records: [],
   };
 
-  for (let i = 0; i < actorList.pages * actorList.size; i++) {
+  let count = pageSize;
+  const isLastPage = current === actorList.pages;
+  if (isLastPage) {
+    count = total % pageSize;
+  }
+
+  for (let i = 0; i < count; i++) {
     actorList.records.push({
       certify: Random.integer(1, 99),
       cooperation: {},
@@ -70,7 +49,7 @@ const getActorList = () => {
       starLanguage: 'Chinese',
       starMasterImg: Random.image(),
       starMasterVideo: Random.image(),
-      starName: Random.cname(),
+      starName: Number(pageNum * pageSize + i) + Random.cname(),
       starNation: Random.province(),
       starRepresentativeWork: Random.cparagraph(),
       starWeight: Random.integer(1, 99),
@@ -82,31 +61,12 @@ const getActorList = () => {
 };
 
 export default {
-  tableData: _ => {
+  getByParam: _ => {
+    const { pageNum, pageSize, starName } = getParams(_.url);
     return {
       code: 200,
       message: 'success',
-      data: {
-        list,
-      },
-    };
-  },
-
-  dashboardTable: _ => {
-    return {
-      code: 200,
-      message: 'success',
-      data: {
-        list: list2,
-      },
-    };
-  },
-
-  getByParam: () => {
-    return {
-      code: 200,
-      message: 'success',
-      data: getActorList(),
+      data: getActorList({ pageNum, pageSize, starName }),
     };
   },
   defaultResult: () => {

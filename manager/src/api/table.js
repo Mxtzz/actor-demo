@@ -1,9 +1,10 @@
 import { request } from '@/utils/request';
 
-export function getByParam() {
+export function getByParam(data) {
   return request({
     url: '/star/getByParam',
     method: 'get',
+    data,
   });
 }
 

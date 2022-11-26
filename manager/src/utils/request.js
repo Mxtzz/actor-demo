@@ -177,3 +177,14 @@ const http = new HttpRequest();
 
 export const request = http.request.bind(http);
 export default http;
+
+export const getParams = (url = '') => {
+  const urlStr = url.split('?')[1];
+  const paramsArr = urlStr.split('&');
+  const result = {};
+  for (const param of paramsArr) {
+    const arr = param.split('=');
+    result[arr[0]] = arr[1];
+  }
+  return result;
+};
