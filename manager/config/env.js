@@ -25,7 +25,6 @@ if (!NODE_ENV) {
 // https://github.com/bkeepers/dotenv#what-other-env-files-can-i-use
 const dotenvFiles = [`${paths.dotenv}/${ENV}.env`].filter(Boolean);
 
-
 // Load environment variables from .env* files. Suppress warnings using silent
 // if this file is missing. dotenv will never modify any environment variables
 // that have already been set.  Variable expansion is supported in .env files.
@@ -89,6 +88,8 @@ function getClientEnvironment(publicUrl) {
         // Whether or not react-refresh is enabled.
         // It is defined here so it is available in the webpackHotDevClient.
         FAST_REFRESH: process.env.FAST_REFRESH !== 'false',
+        API_SERVER: process.env.API_SERVER,
+        MOCK_OPEN: process.env.MOCK_OPEN === 'true',
       },
     );
   // Stringify all values so we can feed into webpack DefinePlugin
