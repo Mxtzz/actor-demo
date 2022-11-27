@@ -8,7 +8,18 @@ const data = {
   cooperation: {},
   createBy: '',
   createTime: Date.now(),
-  experience: Random.cparagraph(),
+  experience: [
+    {
+      img: Random.image(),
+      url: 'http://www.baidu.com',
+      title: '百度1',
+    },
+    {
+      img: Random.image(),
+      url: 'http://www.baidu.com',
+      title: '百度2',
+    },
+  ],
   id: Random.integer(24),
   sort: 1,
   starAge: Random.integer(1, 99),

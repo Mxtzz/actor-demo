@@ -14,7 +14,8 @@ import { store } from '@/store';
 class HttpRequest {
   // #baseUrl
   constructor() {
-    this.baseUrl = this.getBaseUrl();
+    // this.baseUrl = this.getBaseUrl();
+    this.baseUrl = process.env.API_SERVER;
     this.withCredentials = false;
     this.timeout = 10000;
   }

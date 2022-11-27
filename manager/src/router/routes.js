@@ -80,14 +80,14 @@ const asyncRoutesList = [
           import(/* webpackChunkName:'ErrorPage404'*/ '@/views/manage/list'),
         ),
       },
-      {
-        path: '/manage/add',
-        title: '添加',
-        roles: ['admin', 'editor'],
-        component: dynamicImport(() =>
-          import(/* webpackChunkName:'ErrorPage401'*/ '@/views/manage/add'),
-        ),
-      },
+      // {
+      //   path: '/manage/add',
+      //   title: '添加',
+      //   roles: ['admin', 'editor'],
+      //   component: dynamicImport(() =>
+      //     import(/* webpackChunkName:'ErrorPage401'*/ '@/views/manage/add'),
+      //   ),
+      // },
     ],
   },
   {
