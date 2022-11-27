@@ -2,7 +2,8 @@ import Mock from 'mockjs';
 import { getParams } from '../api';
 const { Random } = Mock;
 
-const total = Random.integer(0, 399);
+// const total = Random.integer(0, 399);
+const total = 1;
 
 const getActorList = ({ pageNum, pageSize, starName }) => {
   // 数据

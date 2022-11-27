@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { List, Skeleton, Divider } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { getByParam } from '@/api';
 
@@ -21,7 +21,12 @@ const HomeList = ({ starName = '' }) => {
   });
   const [loading, setLoading] = useState(false);
 
+  const lastParam = useRef({});
   useEffect(() => {
+    if (JSON.stringify(lastParam.current) === JSON.stringify(param)) {
+      return;
+    }
+    lastParam.current = param;
     (async () => {
       try {
         const result = await getByParam({ ...param });
