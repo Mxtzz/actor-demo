@@ -99,18 +99,14 @@ const DataList = () => {
     });
   };
 
-  const onSearch = value => {
-    if (value) {
-      console.log('===search', value);
-      setRecords([]);
-      setParam({
-        starName: value,
-        pageNum: 1,
-        pageSize: 30,
-      });
-    } else {
-      message.warning('请输入姓名搜索！');
-    }
+  const onSearch = (value = '') => {
+    console.log('===search', value);
+    setRecords([]);
+    setParam({
+      starName: value,
+      pageNum: 1,
+      pageSize: 30,
+    });
   };
 
   const onReload = () => {

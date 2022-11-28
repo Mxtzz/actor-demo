@@ -9,11 +9,15 @@ const defaultResult = {
   data: {},
 };
 
-const total = Random.integer(0, 399);
+let total = Random.integer(0, 399);
 
 const getActorList = ({ pageNum, pageSize, starName }) => {
   // 数据
   const current = Number(pageNum);
+
+  if (starName) {
+    total = Random.integer(0, 10);
+  }
 
   const actorList = {
     current,
@@ -30,13 +34,23 @@ const getActorList = ({ pageNum, pageSize, starName }) => {
     count = total % pageSize;
   }
 
+  const expCont = Random.integer(0, 6);
+  const experience = [];
+
+  for (let i = 0; i < expCont; i++) {
+    experience.push({
+      title: Random.integer(1, 999999999999),
+      img: Random.image(),
+      url: 'http://www.baidu.com',
+    });
+  }
+
   for (let i = 0; i < count; i++) {
     actorList.records.push({
-      certify: Random.integer(1, 99),
+      certify: Random.boolean(),
       cooperation: {},
       createBy: '',
       createTime: Date.now(),
-      experience: Random.cparagraph(),
       id: Random.integer(24),
       sort: 1,
       starAge: Random.integer(1, 99),
@@ -54,6 +68,7 @@ const getActorList = ({ pageNum, pageSize, starName }) => {
       starRepresentativeWork: Random.cparagraph(),
       starWeight: Random.integer(1, 99),
       updateTime: Date.now(),
+      experience,
     });
   }
 
