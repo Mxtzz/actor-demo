@@ -1,5 +1,5 @@
 import { DetailLayout } from './layout';
-import { Gallery } from './gallery';
+import { Image } from './gallery';
 import { useState, useEffect } from 'react';
 import { getParams, getDetail } from '@/api';
 import { useLocation } from 'react-router-dom';
@@ -37,7 +37,15 @@ export const Detail = () => {
 
   return (
     <>
-      <DetailLayout loading={loading} gallery={<Gallery list={gallery} />} detail={detail} />;
+      <DetailLayout
+        loading={loading}
+        gallery={
+          // <Gallery list={gallery} />
+          <Image src={gallery[0].src} />
+        }
+        detail={detail}
+      />
+      ;
     </>
   );
 };

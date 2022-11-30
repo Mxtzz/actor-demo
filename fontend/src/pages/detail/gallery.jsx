@@ -110,3 +110,11 @@ const Img = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
 `;
+
+export const Image = ({ src }) => {
+  return (
+    <SlideWrapper>
+      <Img src={src} />
+    </SlideWrapper>
+  );
+};

@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 import { COLOR } from '@config/constant';
 import { Divider, Typography, Skeleton, Image, Space } from 'antd';
-import { detail } from '../../mock/detail';
 import React from 'react';
 import moment from 'moment';
 
-const { Title, Paragraph } = Typography;
+const { Title } = Typography;
 
 export const DetailLayout = props => {
   const { loading, detail } = props;
@@ -73,7 +72,7 @@ export const DetailLayout = props => {
             </ALeft>
             <ARight>
               <Typography.Title level={5} style={{ margin: 0, fontWeight: 400 }}>
-                <a href={item.url} target={'_blank'}>
+                <a href={item.url} rel="noreferrer" target={'_blank'}>
                   {item.title}
                 </a>
               </Typography.Title>

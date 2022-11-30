@@ -31,6 +31,7 @@ const getActorList = ({ pageNum, pageSize, starName }) => {
       createBy: '',
       createTime: Date.now(),
       experience: Random.cparagraph(),
+      starHead: Random.image(),
       id: Random.integer(24),
       sort: 1,
       starAge: Random.integer(1, 99),

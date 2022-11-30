@@ -61,6 +61,7 @@ const getActorList = ({ pageNum, pageSize, starName }) => {
       starImg: Random.image(),
       starImgs: Random.image(),
       starLanguage: 'Chinese',
+      starHead: Random.image(),
       starMasterImg: Random.image(),
       starMasterVideo: Random.image(),
       starName: Number(pageNum * pageSize + i) + Random.cname(),

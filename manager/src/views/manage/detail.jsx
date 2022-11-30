@@ -34,10 +34,10 @@ export const DetailModal = props => {
           title: '语言',
           value: detail.starLanguage,
         },
-        {
-          title: '爱好',
-          value: detail.starHobby,
-        },
+        // {
+        //   title: '爱好',
+        //   value: detail.starHobby,
+        // },
         {
           title: '地区',
           value: detail.starNation,
@@ -61,10 +61,6 @@ export const DetailModal = props => {
         {
           title: '更新时间',
           value: detail.updateTime,
-        },
-        {
-          title: 'starRepresentativeWork',
-          value: detail.starRepresentativeWork,
         },
       ]
     : [];

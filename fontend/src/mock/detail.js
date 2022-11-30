@@ -31,6 +31,7 @@ const data = {
   starImgs: Random.image(),
   starLanguage: 'Chinese',
   starMasterImg: Random.image(),
+  starHead: Random.image(),
   starMasterVideo: Random.image(),
   starName: Random.cname(),
   starNation: Random.province(),
