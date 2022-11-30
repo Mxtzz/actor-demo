@@ -65,11 +65,15 @@ export const UploadImg = props => {
       beforeUpload={beforeUpload}
     >
       {imageUrl ? (
-        <img
-          src={imageUrl}
+        <div
           alt="avatar"
           style={{
             width: '100%',
+            height: '100%',
+            backgroundImage: `url(${imageUrl})`,
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'contain',
           }}
         />
       ) : (

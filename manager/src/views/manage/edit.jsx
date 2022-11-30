@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
 import {
@@ -12,58 +12,83 @@ import {
   DatePicker,
   Modal,
 } from 'antd';
-import { saveOrUpdate } from '../../api/table';
+import { saveOrUpdate, selectDetail } from '../../api/table';
 import { Exp } from './exp';
 import { UploadImg } from './upload';
 
 const { TextArea } = Input;
 
 export const Edit = props => {
-  const { show, onClose, onCancel, data } = props;
+  const { id, onClose, onCancel } = props;
   const [form] = Form.useForm();
   const [confirmLoading, setConfirmLoading] = useState(false);
+  const [detail, setDetail] = useState();
+
+  const lastId = useRef();
 
   useEffect(() => {
-    if (data) {
-      console.log('展示修改Modal：', data);
+    if (lastId.current === id) {
+      return;
+    }
+    lastId.current = id;
+    if (!id) {
+      setDetail();
+      return;
+    }
+    (async () => {
+      try {
+        const result = await selectDetail(id);
+        if (result && result.data) {
+          setDetail(result.data);
+        }
+      } catch (err) {
+        message.error('获取Detail失败');
+      }
+    })();
+    setDetail();
+  }, [id]);
+
+  useEffect(() => {
+    if (detail) {
+      console.log('展示修改Modal：', detail);
       form.setFields([
         {
           name: 'starName',
-          value: data.starName,
+          value: detail.starName,
         },
         {
           name: 'starAge',
-          value: data.starAge,
+          value: detail.starAge,
         },
         {
           name: 'starHeight',
-          value: data.starHeight,
+          value: detail.starHeight,
         },
         {
           name: 'starWeight',
-          value: data.starWeight,
+          value: detail.starWeight,
         },
         {
           name: 'starNation',
-          value: data.starNation,
+          value: detail.starNation,
         },
         {
           name: 'starLanguage',
-          value: data.starLanguage,
+          value: detail.starLanguage,
         },
         {
           name: 'starBriefIntroduction',
-          value: data.starBriefIntroduction,
+          value: detail.starBriefIntroduction,
         },
       ]);
     }
-  }, [form, data]);
+  }, [form, detail]);
 
   const onFinish = async fields => {
     setConfirmLoading(true);
     try {
-      console.log('修改参数：', { ...fields, id: data.id });
-      const result = await saveOrUpdate({ ...fields, id: data.id });
+      console.log('修改参数：', { ...fields, id: detail.id });
+      const result = await saveOrUpdate({ ...fields, id: detail.id });
       console.log('修改结果：', result);
       onClose();
       setConfirmLoading(false);
@@ -79,7 +104,7 @@ export const Edit = props => {
     form.resetFields();
   };
 
-  const experience = (data?.experience || []).map((item, i) => {
+  const experience = (detail?.experience || []).map((item, i) => {
     return {
       ...item,
       key: item.title + i,
@@ -89,7 +114,7 @@ export const Edit = props => {
   return (
     <Modal
       title="添加新成员"
-      open={show}
+      open={!!id}
       maskClosable={false}
       centered={true}
       bodyStyle={{
@@ -158,7 +183,7 @@ export const Edit = props => {
                 <>
                   <DatePicker
                     placeholder="请选择日期"
-                    defaultValue={moment(data?.starDate)}
+                    defaultValue={moment(detail?.starDate)}
                     onChange={v =>
                       form.setFieldValue('starDate', v.format('YYYY-MM-DD'))
                     }
@@ -182,7 +207,7 @@ export const Edit = props => {
             <Col span={8}>
               <Form.Item name="starHead" label="头像">
                 <UploadImg
-                  img={data?.starHead}
+                  img={detail?.starHead}
                   getImgSrc={v => {
                     form.setFieldValue('starHead', v);
                   }}
@@ -192,7 +217,7 @@ export const Edit = props => {
             <Col span={8}>
               <Form.Item name="starMasterImg" label="C位">
                 <UploadImg
-                  img={data?.starMasterImg}
+                  img={detail?.starMasterImg}
                   getImgSrc={v => {
                     form.setFieldValue('starMasterImg', v);
                   }}

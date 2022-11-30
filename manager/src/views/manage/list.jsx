@@ -57,9 +57,7 @@ const DataList = () => {
       key: 'handle',
       render: id => (
         <Space>
-          <Button onClick={() => setShowDetail(records.find(r => r.id === id))}>
-            {'Detail'}
-          </Button>
+          <Button onClick={() => setShowDetail(id)}>{'Detail'}</Button>
           <Button type={'primary'} onClick={() => setEditId(id)}>
             {'编辑'}
           </Button>
@@ -145,8 +143,7 @@ const DataList = () => {
       </Skeleton>
 
       <Edit
-        show={!!editId}
-        data={records.find(r => r.id === editId)}
+        id={editId}
         onClose={() => {
           setEditId();
           onReload();
@@ -154,7 +151,7 @@ const DataList = () => {
         onCancel={() => setEditId()}
       />
 
-      <DetailModal detail={showDetail} onClose={() => setShowDetail()} />
+      <DetailModal id={showDetail} onClose={() => setShowDetail()} />
     </Wrapper>
   );
 };

@@ -76,6 +76,44 @@ const getActorList = ({ pageNum, pageSize, starName }) => {
   return actorList;
 };
 
+const getDetail = () => {
+  const expCont = Random.integer(0, 6);
+  const experience = [];
+
+  for (let i = 0; i < expCont; i++) {
+    experience.push({
+      title: Random.integer(1, 999999999999),
+      img: Random.image(),
+      url: 'http://www.baidu.com',
+    });
+  }
+  return {
+    certify: Random.boolean(),
+    cooperation: {},
+    createBy: '',
+    createTime: Date.now(),
+    id: Random.integer(24),
+    sort: 1,
+    starAge: Random.integer(1, 99),
+    starBriefIntroduction: Random.cparagraph(),
+    starDate: Date.now(),
+    starHeight: Random.integer(100, 199).toString(),
+    starHobby: Random.cparagraph(),
+    starImg: Random.image(),
+    starImgs: Random.image(),
+    starLanguage: 'Chinese',
+    starHead: Random.image(),
+    starMasterImg: Random.image(),
+    starMasterVideo: Random.image(),
+    starName: Random.cname(),
+    starNation: Random.province(),
+    starRepresentativeWork: Random.cparagraph(),
+    starWeight: Random.integer(1, 99),
+    updateTime: Date.now(),
+    experience,
+  };
+};
+
 export default {
   getByParam: _ => {
     const { pageNum, pageSize, starName } = getParams(_.url);
@@ -93,6 +131,15 @@ export default {
     return {
       ...defaultResult,
       data: 'https://asset.txqn.huohua.cn/assets/b0df4fad-ade4-4acc-b1d3-8b7025357e9d.jpg',
+    };
+  },
+
+  selectDetail: _ => {
+    const { id } = getParams(_.url);
+    return {
+      code: 200,
+      message: 'success',
+      data: getDetail(id),
     };
   },
 };

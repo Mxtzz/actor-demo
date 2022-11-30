@@ -1,12 +1,38 @@
-import React from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
-import { Modal, Typography, Image, Row, Col } from 'antd';
+import { Modal, Typography, Image, Row, Col, message } from 'antd';
+import { useEffect, useState, useRef } from 'react';
+import { selectDetail } from '../../api/table';
 
 const { Title } = Typography;
 
 export const DetailModal = props => {
-  const { detail, onClose } = props;
+  const { id, onClose } = props;
+  const [detail, setDetail] = useState();
+
+  const lastId = useRef();
+
+  useEffect(() => {
+    if (lastId.current === id) {
+      return;
+    }
+    lastId.current = id;
+    if (!id) {
+      setDetail();
+      return;
+    }
+    (async () => {
+      try {
+        const result = await selectDetail(id);
+        if (result && result.data) {
+          setDetail(result.data);
+        }
+      } catch (err) {
+        message.error('获取Detail失败');
+      }
+    })();
+    setDetail();
+  }, [id]);
 
   const descList = detail
     ? [

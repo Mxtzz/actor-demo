@@ -3,8 +3,14 @@ import loginMock from './login';
 import tableMock from './table';
 
 const { login, userInfo, logout } = loginMock;
-const { tableData, dashboardTable, getByParam, defaultResult, getUpload } =
-  tableMock;
+const {
+  tableData,
+  dashboardTable,
+  getByParam,
+  defaultResult,
+  getUpload,
+  selectDetail,
+} = tableMock;
 
 // login
 Mock.mock(/\/login/, 'post', login);
@@ -21,4 +27,5 @@ if (process.env.MOCK_OPEN === true) {
   Mock.mock(/star\/del/, 'get', defaultResult);
   Mock.mock(/star\/saveOrUpdate/, 'post', defaultResult);
   Mock.mock(/star\/upload/, 'post', getUpload);
+  Mock.mock(/star\/selectDetail/, 'get', selectDetail);
 }
