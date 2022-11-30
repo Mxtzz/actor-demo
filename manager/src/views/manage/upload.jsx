@@ -60,7 +60,7 @@ export const UploadImg = props => {
       listType="picture-card"
       className="avatar-uploader"
       showUploadList={false}
-      action={'/star/upload'}
+      action={process.env.API_SERVER + '/star/upload'}
       customRequest={customRequest}
       beforeUpload={beforeUpload}
     >
