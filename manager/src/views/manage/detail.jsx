@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
-import { Modal, Typography, Space, Image, Row, Col, Divider } from 'antd';
+import { Modal, Typography, Image, Row, Col } from 'antd';
 
-const { Title, Paragraph } = Typography;
+const { Title } = Typography;
 
 export const DetailModal = props => {
   const { detail, onClose } = props;
