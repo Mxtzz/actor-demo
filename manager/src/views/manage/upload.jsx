@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { message, Upload } from 'antd';
 import { useEffect } from 'react';
+import axios from 'axios';
 
 const beforeUpload = file => {
   const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
@@ -23,15 +24,22 @@ export const UploadImg = props => {
     getImgSrc(imageUrl);
   }, [imageUrl]);
 
-  const handleChange = info => {
-    if (info.file.status === 'uploading') {
+  const customRequest = async v => {
+    const formData = new FormData();
+    formData.append('file', v.file);
+    try {
       setLoading(true);
-      return;
+      const result = await axios.post(v.action, formData, {
+        'Content-Type': 'multipart/form-data',
+      });
+      if (result.status === 200 && result.data?.data) {
+        setImageUrl(result.data?.data);
+      }
+    } catch (err) {
+      message.error('图片上传失败');
+      console.error(err);
     }
-    if (info.file.status === 'done' && info.file.response?.data) {
-      setLoading(false);
-      setImageUrl(info.file.response.data);
-    }
+    setLoading(false);
   };
 
   const uploadButton = (
@@ -52,9 +60,9 @@ export const UploadImg = props => {
       listType="picture-card"
       className="avatar-uploader"
       showUploadList={false}
-      action="/star/upload"
+      action={'/star/upload'}
+      customRequest={customRequest}
       beforeUpload={beforeUpload}
-      onChange={handleChange}
     >
       {imageUrl ? (
         <img
