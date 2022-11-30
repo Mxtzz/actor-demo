@@ -46,7 +46,7 @@ const DataList = () => {
       key: 'email',
     },
     {
-      title: '照片',
+      title: '头像',
       dataIndex: 'starHead',
       key: 'picture',
       render: src => <Avatar src={src} />,

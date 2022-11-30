@@ -9,14 +9,12 @@ import {
   Col,
   Row,
   Button,
-  Typography,
 } from 'antd';
 import { saveOrUpdate } from '../../api/table';
 import { Exp } from './exp';
 import { UploadImg } from './upload';
 
 const { TextArea } = Input;
-const { Paragraph } = Typography;
 
 export const Add = props => {
   const [form] = Form.useForm();
@@ -55,7 +53,7 @@ export const Add = props => {
         onFinish={onFinish}
       >
         <Row>
-          <Col span={12}>
+          <Col span={8}>
             <Form.Item
               name="starName"
               label="姓名"
@@ -64,33 +62,30 @@ export const Add = props => {
               <Input type="text" autoFocus={true} />
             </Form.Item>
           </Col>
-          <Col span={12}>
+          <Col span={8}>
             <Form.Item name="starAge" label="年龄">
               <Input type="number" />
             </Form.Item>
           </Col>
-        </Row>
-
-        <Row>
-          <Col span={12}>
+          <Col span={8}>
             <Form.Item name="starHeight" label="身高">
               <Input type="number" />
             </Form.Item>
           </Col>
-          <Col span={12}>
+        </Row>
+
+        <Row>
+          <Col span={8}>
             <Form.Item name="starWeight" label="体重">
               <Input type="number" />
             </Form.Item>
           </Col>
-        </Row>
-
-        <Row>
-          <Col span={12}>
+          <Col span={8}>
             <Form.Item name="starNation" label="民族">
               <Input type="text" />
             </Form.Item>
           </Col>
-          <Col span={12}>
+          <Col span={8}>
             <Form.Item name="starLanguage" label="语言">
               <Input type="text" />
             </Form.Item>
@@ -98,12 +93,12 @@ export const Add = props => {
         </Row>
 
         <Row>
-          <Col span={12}>
+          <Col span={8}>
             <Form.Item name="starDate" label="生日">
               <DatePicker placeholder="请选择日期" />
             </Form.Item>
           </Col>
-          <Col span={12}>
+          <Col span={10}>
             <Form.Item name="certify" label="已认证" valuePropName="checked">
               <Switch />
             </Form.Item>
@@ -111,13 +106,22 @@ export const Add = props => {
         </Row>
 
         <Row>
-          <Col span={12}>
+          <Col span={8}>
             <Form.Item name="starBriefIntroduction" label="简介">
               <TextArea rows={4} />
             </Form.Item>
           </Col>
-          <Col span={12}>
-            <Form.Item name="starMasterImg" label="C位照片">
+          <Col span={8}>
+            <Form.Item name="starHead" label="头像">
+              <UploadImg
+                getImgSrc={v => {
+                  form.setFieldValue('starHead', v);
+                }}
+              />
+            </Form.Item>
+          </Col>
+          <Col span={8}>
+            <Form.Item name="starMasterImg" label="照片">
               <UploadImg
                 getImgSrc={v => {
                   form.setFieldValue('starMasterImg', v);
@@ -128,23 +132,24 @@ export const Add = props => {
         </Row>
 
         <Row>
-          <Col span={2}>
-            <Form.Item name="experience" label="">
-              <Paragraph>{'经历：'}</Paragraph>
+          <Col span={24}>
+            <Form.Item name="experience" label="" style={{ display: 'none' }}>
+              <></>
             </Form.Item>
-          </Col>
-          <Col span={22}>
             <Exp
               exp={[]}
               getExp={v => {
                 const exp = v.map(item => {
-                  return { title: item.title, url: item.url, img: item.src };
+                  return {
+                    title: item.title,
+                    url: item.url,
+                    img: item.src,
+                  };
                 });
                 form.setFieldValue('experience', exp);
               }}
             />
           </Col>
-          <Col span={12}></Col>
         </Row>
 
         <Footer>

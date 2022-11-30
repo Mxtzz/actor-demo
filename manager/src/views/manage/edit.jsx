@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import dayjs from 'dayjs';
 import moment from 'moment';
 import {
   Form,
@@ -12,14 +11,12 @@ import {
   Button,
   DatePicker,
   Modal,
-  Typography,
 } from 'antd';
 import { saveOrUpdate } from '../../api/table';
 import { Exp } from './exp';
 import { UploadImg } from './upload';
 
 const { TextArea } = Input;
-const { Paragraph } = Typography;
 
 export const Edit = props => {
   const { show, onClose, onCancel, data } = props;
@@ -117,64 +114,59 @@ export const Edit = props => {
           onFinish={onFinish}
         >
           <Row>
-            <Col span={12}>
+            <Col span={8}>
               <Form.Item
                 name="starName"
                 label="姓名"
-                rules={[{ required: true, message: `'姓名'为必填项` }]}
+                // rules={[{ required: true, message: `'姓名'为必填项` }]}
               >
                 <Input type="text" autoFocus={true} />
               </Form.Item>
             </Col>
-            <Col span={12}>
+            <Col span={8}>
               <Form.Item name="starAge" label="年龄">
                 <Input type="number" />
               </Form.Item>
             </Col>
-          </Row>
-
-          <Row>
-            <Col span={12}>
+            <Col span={8}>
               <Form.Item name="starHeight" label="身高">
                 <Input type="number" />
               </Form.Item>
             </Col>
-            <Col span={12}>
+          </Row>
+
+          <Row>
+            <Col span={8}>
               <Form.Item name="starWeight" label="体重">
                 <Input type="number" />
               </Form.Item>
             </Col>
-          </Row>
-
-          <Row>
-            <Col span={12}>
+            <Col span={8}>
               <Form.Item name="starNation" label="民族">
                 <Input type="text" />
               </Form.Item>
             </Col>
-            <Col span={12}>
+            <Col span={8}>
               <Form.Item name="starLanguage" label="语言">
                 <Input type="text" />
               </Form.Item>
             </Col>
           </Row>
-
           <Row>
-            <Col span={3}>
-              <Form.Item name="starDate" label="">
-                <Paragraph>{'生日：'}</Paragraph>
+            <Col span={8}>
+              <Form.Item name="starDate" label="生日">
+                <>
+                  <DatePicker
+                    placeholder="请选择日期"
+                    defaultValue={moment(data?.starDate)}
+                    onChange={v =>
+                      form.setFieldValue('starDate', v.format('YYYY-MM-DD'))
+                    }
+                  />
+                </>
               </Form.Item>
             </Col>
-            <Col span={9}>
-              <DatePicker
-                placeholder="请选择日期"
-                defaultValue={moment(data?.starDate)}
-                onChange={v =>
-                  form.setFieldValue('starDate', v.format('YYYY-MM-DD'))
-                }
-              />
-            </Col>
-            <Col span={12}>
+            <Col span={10}>
               <Form.Item name="certify" label="已认证" valuePropName="checked">
                 <Switch />
               </Form.Item>
@@ -182,13 +174,23 @@ export const Edit = props => {
           </Row>
 
           <Row>
-            <Col span={12}>
+            <Col span={8}>
               <Form.Item name="starBriefIntroduction" label="简介">
                 <TextArea rows={4} />
               </Form.Item>
             </Col>
-            <Col span={12}>
-              <Form.Item name="starMasterImg" label="C位照片">
+            <Col span={8}>
+              <Form.Item name="starHead" label="头像">
+                <UploadImg
+                  img={data?.starHead}
+                  getImgSrc={v => {
+                    form.setFieldValue('starHead', v);
+                  }}
+                />
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item name="starMasterImg" label="C位">
                 <UploadImg
                   img={data?.starMasterImg}
                   getImgSrc={v => {
@@ -200,23 +202,24 @@ export const Edit = props => {
           </Row>
 
           <Row>
-            <Col span={2}>
-              <Form.Item name="experience" label="">
-                <Paragraph>{'经历：'}</Paragraph>
+            <Col span={24}>
+              <Form.Item name="experience" label="" style={{ display: 'none' }}>
+                <></>
               </Form.Item>
-            </Col>
-            <Col span={22}>
               <Exp
                 exp={experience}
                 getExp={v => {
                   const exp = v.map(item => {
-                    return { title: item.title, url: item.url, img: item.src };
+                    return {
+                      title: item.title,
+                      url: item.url,
+                      img: item.src,
+                    };
                   });
                   form.setFieldValue('experience', exp);
                 }}
               />
             </Col>
-            <Col span={12}></Col>
           </Row>
 
           <Footer>
