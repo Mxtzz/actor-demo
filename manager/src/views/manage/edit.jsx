@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import dayjs from 'dayjs';
+import moment from 'moment';
 import {
   Form,
   Input,
@@ -62,7 +64,6 @@ export const Edit = props => {
 
   const onFinish = async fields => {
     setConfirmLoading(true);
-
     try {
       console.log('修改参数：', { ...fields, id: data.id });
       const result = await saveOrUpdate({ ...fields, id: data.id });
@@ -159,10 +160,19 @@ export const Edit = props => {
           </Row>
 
           <Row>
-            <Col span={12}>
-              <Form.Item name="starDate" label="生日">
-                <DatePicker placeholder="请选择日期" />
+            <Col span={3}>
+              <Form.Item name="starDate" label="">
+                <Paragraph>{'生日：'}</Paragraph>
               </Form.Item>
+            </Col>
+            <Col span={9}>
+              <DatePicker
+                placeholder="请选择日期"
+                defaultValue={moment(data?.starDate)}
+                onChange={v =>
+                  form.setFieldValue('starDate', v.format('YYYY-MM-DD'))
+                }
+              />
             </Col>
             <Col span={12}>
               <Form.Item name="certify" label="已认证" valuePropName="checked">
@@ -180,6 +190,7 @@ export const Edit = props => {
             <Col span={12}>
               <Form.Item name="starMasterImg" label="C位照片">
                 <UploadImg
+                  img={data?.starMasterImg}
                   getImgSrc={v => {
                     form.setFieldValue('starMasterImg', v);
                   }}
@@ -199,7 +210,7 @@ export const Edit = props => {
                 exp={experience}
                 getExp={v => {
                   const exp = v.map(item => {
-                    return { title: item.title, url: item.url, src: item.src };
+                    return { title: item.title, url: item.url, img: item.src };
                   });
                   form.setFieldValue('experience', exp);
                 }}

@@ -81,13 +81,15 @@ const EditableCell = ({
 };
 
 export const Exp = ({ exp, getExp = () => {} }) => {
+  exp.forEach((e, i) => (e.key = i));
   const [dataSource, setDataSource] = useState(exp || []);
 
   useEffect(() => {
     getExp(dataSource);
   }, [dataSource]);
 
-  const [count, setCount] = useState(2);
+  const [count, setCount] = useState(0);
+
   const handleDelete = key => {
     const newData = dataSource.filter(item => item.key !== key);
     setDataSource(newData);
@@ -112,7 +114,7 @@ export const Exp = ({ exp, getExp = () => {} }) => {
           img={record.img}
           getImgSrc={v => {
             setDataSource(d => {
-              const select = d.find(x => x.key === count);
+              const select = d.find(x => x.key === record.key);
               if (select) select.src = v;
               return [...d];
             });
@@ -139,17 +141,7 @@ export const Exp = ({ exp, getExp = () => {} }) => {
       key: count,
       title: `点击修改标题`,
       url: '点击修改链接',
-      img: (
-        <UploadImg
-          getImgSrc={v => {
-            setDataSource(d => {
-              const select = d.find(x => x.key === count);
-              if (select) select.src = v;
-              return [...d];
-            });
-          }}
-        />
-      ),
+      img: '',
     };
     setDataSource([...dataSource, newData]);
     setCount(count + 1);

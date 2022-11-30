@@ -25,7 +25,7 @@ export const Add = props => {
 
   const onFinish = async fields => {
     setConfirmLoading(true);
-    fields.starDate = fields.starDate.format('YYYY-MM-DD');
+    fields.starDate = fields.starDate?.format('YYYY-MM-DD');
     try {
       console.log('添加新Item参数：', fields);
       const result = await saveOrUpdate(fields);
@@ -138,7 +138,7 @@ export const Add = props => {
               exp={[]}
               getExp={v => {
                 const exp = v.map(item => {
-                  return { title: item.title, url: item.url, src: item.src };
+                  return { title: item.title, url: item.url, img: item.src };
                 });
                 form.setFieldValue('experience', exp);
               }}

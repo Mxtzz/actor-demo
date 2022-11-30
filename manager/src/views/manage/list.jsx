@@ -47,7 +47,7 @@ const DataList = () => {
     },
     {
       title: '照片',
-      dataIndex: 'starImg',
+      dataIndex: 'starHead',
       key: 'picture',
       render: src => <Avatar src={src} />,
     },
