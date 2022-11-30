@@ -116,7 +116,7 @@ const HomeList = ({ starName = '' }) => {
             renderItem={item => (
               <List.Item>
                 <ItemWrapper onClick={() => onClick(item.id)}>
-                  <Img bg={item.starMasterImg} />
+                  <Img bg={item.starHead} />
                   <TitleWrapper>
                     <Title>{item.starName}</Title>
                     <Desc>{item.starAge + '岁'}</Desc>
