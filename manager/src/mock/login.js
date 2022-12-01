@@ -8,7 +8,7 @@ const users = {
   'admin-token': {
     id: 'admin',
     roles: ['admin'],
-    username: 'Mxtzz',
+    username: 'Admin',
     avatar: 'https://pic2.zhimg.com/v2-8fac0cdf423ebe9f02e22b2e2da249a5_r.jpg',
     description: '我是超级管理员',
   },
