@@ -18,7 +18,11 @@ const beforeUpload = file => {
 export const UploadImg = props => {
   const { img, getImgSrc = () => {} } = props;
   const [loading, setLoading] = useState(false);
-  const [imageUrl, setImageUrl] = useState(img);
+  const [imageUrl, setImageUrl] = useState('');
+
+  useEffect(() => {
+    setImageUrl(img);
+  }, [img]);
 
   useEffect(() => {
     getImgSrc(imageUrl);
@@ -54,6 +58,7 @@ export const UploadImg = props => {
       </div>
     </div>
   );
+
   return (
     <Upload
       name="avatar"
