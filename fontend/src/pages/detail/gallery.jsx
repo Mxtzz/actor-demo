@@ -102,6 +102,7 @@ const SlideWrapper = styled.div`
   display: flex;
   cursor: grab;
   flex-direction: column;
+  margin: 0 20px;
 `;
 const Img = styled.div`
   flex: 1;
