@@ -82,11 +82,15 @@ const EditableCell = ({
 
 export const Exp = ({ exp, getExp = () => {} }) => {
   exp.forEach((e, i) => (e.key = i));
-  const [dataSource, setDataSource] = useState(exp || []);
+  const [dataSource, setDataSource] = useState([]);
 
   useEffect(() => {
     getExp(dataSource);
   }, [dataSource]);
+
+  useEffect(() => {
+    setDataSource(exp);
+  }, [exp]);
 
   const [count, setCount] = useState(0);
 

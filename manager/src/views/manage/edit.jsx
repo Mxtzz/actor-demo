@@ -113,7 +113,7 @@ export const Edit = props => {
 
   return (
     <Modal
-      title="添加新成员"
+      title="编辑"
       open={!!id}
       maskClosable={false}
       centered={true}
