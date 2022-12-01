@@ -90,52 +90,52 @@ const asyncRoutesList = [
       // },
     ],
   },
-  {
-    path: '/error',
-    title: '错误页面',
-    redirect: '/error/404',
-    component: Layout,
-    icon: 'warning-circle',
-    roles: ['admin', 'editor'],
-    children: [
-      {
-        path: '/error/404',
-        title: '404',
-        roles: ['admin', 'editor'],
-        component: dynamicImport(() =>
-          import(/* webpackChunkName:'ErrorPage404'*/ '@/views/errorPage/404'),
-        ),
-      },
-      {
-        path: '/error/401',
-        title: '401',
-        roles: ['admin', 'editor'],
-        component: dynamicImport(() =>
-          import(/* webpackChunkName:'ErrorPage401'*/ '@/views/errorPage/401'),
-        ),
-      },
-    ],
-  },
-  // nestedRouter,
-  {
-    path: 'antd',
-    component: Layout,
-    title: '外链',
-    icon: 'sound',
-    roles: ['admin', 'editor'],
-    children: [
-      {
-        roles: ['admin', 'editor'],
-        path: 'https://ant.design/docs/react/introduce-cn',
-        title: 'ant-design',
-      },
-      {
-        roles: ['admin', 'editor'],
-        path: 'https://www.baidu.com/',
-        title: '百度',
-      },
-    ],
-  },
+  // {
+  //   path: '/error',
+  //   title: '错误页面',
+  //   redirect: '/error/404',
+  //   component: Layout,
+  //   icon: 'warning-circle',
+  //   roles: ['admin', 'editor'],
+  //   children: [
+  //     {
+  //       path: '/error/404',
+  //       title: '404',
+  //       roles: ['admin', 'editor'],
+  //       component: dynamicImport(() =>
+  //         import(/* webpackChunkName:'ErrorPage404'*/ '@/views/errorPage/404'),
+  //       ),
+  //     },
+  //     {
+  //       path: '/error/401',
+  //       title: '401',
+  //       roles: ['admin', 'editor'],
+  //       component: dynamicImport(() =>
+  //         import(/* webpackChunkName:'ErrorPage401'*/ '@/views/errorPage/401'),
+  //       ),
+  //     },
+  //   ],
+  // },
+  // // nestedRouter,
+  // {
+  //   path: 'antd',
+  //   component: Layout,
+  //   title: '外链',
+  //   icon: 'sound',
+  //   roles: ['admin', 'editor'],
+  //   children: [
+  //     {
+  //       roles: ['admin', 'editor'],
+  //       path: 'https://ant.design/docs/react/introduce-cn',
+  //       title: 'ant-design',
+  //     },
+  //     {
+  //       roles: ['admin', 'editor'],
+  //       path: 'https://www.baidu.com/',
+  //       title: '百度',
+  //     },
+  //   ],
+  // },
 
   {
     path: '*',
