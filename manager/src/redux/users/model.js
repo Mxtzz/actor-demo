@@ -1,7 +1,7 @@
 import { createModel } from '@rematch/core';
 import { effects } from './effects';
 import { getCookie, addCookie, removeCookie } from '@/utils/cookies';
-import { getUserInfo, logOut } from '@/api/user';
+// import { getUserInfo, logOut } from '@/api/user';
 
 const initState = {
   username: 'Admin',

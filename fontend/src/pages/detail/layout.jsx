@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { COLOR } from '@config/constant';
-import { Divider, Typography, Skeleton, Image, Space, Row, Col } from 'antd';
+import { Divider, Typography, Skeleton, Space, Row, Col } from 'antd';
 import React from 'react';
 import moment from 'moment';
 
@@ -112,31 +112,12 @@ const Wrapper = styled.div`
   padding-top: 64px;
 `;
 
-const Container = styled.div`
-  max-width: 1280px;
-  position: relative;
-  flex: 1;
-  display: flex;
-`;
-
 const Experience = styled.div`
   max-width: 1280px;
   position: relative;
   flex: 1;
   display: flex;
   flex-direction: column;
-`;
-
-const LeftWrapper = styled.div`
-  overflow: hidden;
-  flex: 1;
-  display: flex;
-  justify-content: center;
-`;
-
-const RightWrapper = styled.div`
-  flex: 1;
-  margin-right: 8%;
 `;
 
 const Name = styled.div`
