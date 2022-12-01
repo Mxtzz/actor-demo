@@ -3,6 +3,7 @@ import { COLOR } from '@config/constant';
 import { Divider, Typography, Skeleton, Space, Row, Col } from 'antd';
 import React from 'react';
 import moment from 'moment';
+import { useEffect, useState } from 'react';
 
 const { Title } = Typography;
 
@@ -11,6 +12,14 @@ const IMG =
 
 export const DetailLayout = props => {
   const { loading, detail } = props;
+  const [isMobile, setMobile] = useState(false);
+
+  useEffect(() => {
+    setMobile(window.innerWidth < 500);
+    window.onresize = () => {
+      setMobile(window.innerWidth < 500);
+    };
+  }, []);
 
   if (!detail) return <></>;
 
@@ -33,39 +42,62 @@ export const DetailLayout = props => {
     },
   ];
 
+  const left = <>{loading ? <Skeleton.Image active /> : props.gallery}</>;
+  const right = (
+    <>
+      {loading ? (
+        <Skeleton active />
+      ) : (
+        <>
+          <Name>{detail.starName}</Name>
+          <Descriptions>{detail.starBriefIntroduction}</Descriptions>
+          <Divider style={{ borderTop: '2px solid #e0e0e0' }} />
+          {descList.map(item => (
+            <React.Fragment key={item.title}>
+              <Space>
+                <Title level={5} style={{ margin: 0, fontWeight: 600 }}>
+                  {item.title}
+                </Title>
+                <Title level={5} style={{ margin: 0, fontWeight: 400 }}>
+                  {item.value}
+                </Title>
+              </Space>
+              <br />
+            </React.Fragment>
+          ))}
+        </>
+      )}
+    </>
+  );
+
   return (
     <Wrapper>
-      <Row style={{ maxWidth: '1280px' }}>
-        <Col span={2}></Col>
-        <Col span={10} style={{ display: 'flex', justifyContent: 'center' }}>
-          {loading ? <Skeleton.Image active /> : props.gallery}
-        </Col>
-        <Col span={10}>
-          {loading ? (
-            <Skeleton active />
-          ) : (
-            <>
-              <Name>{detail.starName}</Name>
-              <Descriptions>{detail.starBriefIntroduction}</Descriptions>
-              <Divider style={{ borderTop: '2px solid #e0e0e0' }} />
-              {descList.map(item => (
-                <React.Fragment key={item.title}>
-                  <Space>
-                    <Title level={5} style={{ margin: 0, fontWeight: 600 }}>
-                      {item.title}
-                    </Title>
-                    <Title level={5} style={{ margin: 0, fontWeight: 400 }}>
-                      {item.value}
-                    </Title>
-                  </Space>
-                  <br />
-                </React.Fragment>
-              ))}
-            </>
-          )}
-        </Col>
-        <Col span={2}></Col>
-      </Row>
+      {isMobile ? (
+        <>
+          <Row style={{ maxWidth: '1280px' }}>
+            <Col span={4} />
+            <Col span={16} style={{ display: 'flex', justifyContent: 'center' }}>
+              {left}
+            </Col>
+            <Col span={4} />
+          </Row>
+          <Row>
+            <Col span={4} />
+            <Col span={16}>{right}</Col>
+            <Col span={4} />
+          </Row>
+        </>
+      ) : (
+        <Row style={{ maxWidth: '1280px' }}>
+          <Col span={2}></Col>
+          <Col span={10} style={{ display: 'flex', justifyContent: 'center' }}>
+            {left}
+          </Col>
+          <Col span={10}>{right}</Col>
+          <Col span={2}></Col>
+        </Row>
+      )}
+
       <Row>
         <Experience>
           {(detail.experience || []).map(item => (
@@ -88,7 +120,6 @@ export const DetailLayout = props => {
                     {item.title}
                   </a>
                 </Typography.Title>
-                {/* <Paragraph>{item.desc}</Paragraph> */}
               </ARight>
             </AwardItem>
           ))}
