@@ -4,6 +4,7 @@ import { Divider, Typography, Skeleton, Space, Row, Col } from 'antd';
 import React from 'react';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
+import Bg from '../../assets/home-bg.png';
 
 const { Title } = Typography;
 
@@ -71,61 +72,64 @@ export const DetailLayout = props => {
   );
 
   return (
-    <Wrapper>
-      {isMobile ? (
-        <>
+    <>
+      <Background />
+      <Wrapper>
+        {isMobile ? (
+          <>
+            <Row style={{ maxWidth: '1280px' }}>
+              <Col span={4} />
+              <Col span={16} style={{ display: 'flex', justifyContent: 'center' }}>
+                {left}
+              </Col>
+              <Col span={4} />
+            </Row>
+            <Row>
+              <Col span={4} />
+              <Col span={16}>{right}</Col>
+              <Col span={4} />
+            </Row>
+          </>
+        ) : (
           <Row style={{ maxWidth: '1280px' }}>
-            <Col span={4} />
-            <Col span={16} style={{ display: 'flex', justifyContent: 'center' }}>
+            <Col span={2}></Col>
+            <Col span={10} style={{ display: 'flex', justifyContent: 'center' }}>
               {left}
             </Col>
-            <Col span={4} />
+            <Col span={10}>{right}</Col>
+            <Col span={2}></Col>
           </Row>
-          <Row>
-            <Col span={4} />
-            <Col span={16}>{right}</Col>
-            <Col span={4} />
-          </Row>
-        </>
-      ) : (
-        <Row style={{ maxWidth: '1280px' }}>
-          <Col span={2}></Col>
-          <Col span={10} style={{ display: 'flex', justifyContent: 'center' }}>
-            {left}
-          </Col>
-          <Col span={10}>{right}</Col>
-          <Col span={2}></Col>
-        </Row>
-      )}
+        )}
 
-      <Row>
-        <Experience>
-          {(detail.experience || []).map(item => (
-            <AwardItem key={item.title}>
-              <ALeft>
-                <div
-                  style={{
-                    height: '200px',
-                    width: '180px',
-                    backgroundImage: `url(${item.img || IMG})`,
-                    backgroundPosition: 'center',
-                    backgroundSize: 'cover',
-                    backgroundRepeat: 'no-repeat',
-                  }}
-                />
-              </ALeft>
-              <ARight>
-                <Typography.Title level={5} style={{ margin: 0, fontWeight: 400 }}>
-                  <a href={item.url} rel="noreferrer" target={'_blank'}>
-                    {item.title}
-                  </a>
-                </Typography.Title>
-              </ARight>
-            </AwardItem>
-          ))}
-        </Experience>
-      </Row>
-    </Wrapper>
+        <Row>
+          <Experience>
+            {(detail.experience || []).map(item => (
+              <AwardItem key={item.title}>
+                <ALeft>
+                  <div
+                    style={{
+                      height: '200px',
+                      width: '180px',
+                      backgroundImage: `url(${item.img || IMG})`,
+                      backgroundPosition: 'center',
+                      backgroundSize: 'cover',
+                      backgroundRepeat: 'no-repeat',
+                    }}
+                  />
+                </ALeft>
+                <ARight>
+                  <Typography.Title level={5} style={{ margin: 0, fontWeight: 400 }}>
+                    <a href={item.url} rel="noreferrer" target={'_blank'}>
+                      {item.title}
+                    </a>
+                  </Typography.Title>
+                </ARight>
+              </AwardItem>
+            ))}
+          </Experience>
+        </Row>
+      </Wrapper>
+    </>
   );
 };
 
@@ -140,6 +144,19 @@ const Wrapper = styled.div`
   align-items: center;
   overflow-y: auto;
   padding-top: 64px;
+`;
+
+const Background = styled.div`
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-image: url(${Bg});
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  filter: blur(4px);
 `;
 
 const Experience = styled.div`
